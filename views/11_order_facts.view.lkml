@@ -1,4 +1,4 @@
-include: "/models/**/yoshitake_thelook.model.lkml"
+include: "/models/**/thelook_jp.model.lkml"
 view: order_facts {
   view_label: "Order Facts"
   derived_table: {

@@ -13,7 +13,7 @@ view: user_order_facts {
       FROM looker-private-demo.ecomm.order_items
       GROUP BY user_id
     ;;
-    datagroup_trigger: ecommerce_etl_modified
+    #datagroup_trigger: ecommerce_etl_modified
   }
 
   dimension: user_id {
