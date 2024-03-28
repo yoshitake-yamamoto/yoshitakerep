@@ -4,11 +4,13 @@ include: "01_order_items.view"
 view: +user_order_facts {
 
   dimension: currently_active_customer {
+    label: "アクティブユーザーフラグ"
     type: yesno
     sql: ${latest_order_date} >= DATE_ADD(CURRENT_DATE, INTERVAL -30 DAY) ;;
   }
 
   measure: active_user_count {
+    label: "アクティブユーザー数"
     type: sum
     filters: [lifetime_orders: "< 2", first_order_date: "before 30 days ago"]
     sql: ${user_id} ;;

@@ -1,29 +1,29 @@
 view: products {
   sql_table_name: looker-private-demo.ecomm.products ;;
-  view_label: "Products"
+  view_label: "商品マスタ"
   ### DIMENSIONS ###
 
   dimension: id {
-    label: "ID"
+    label: "商品ID"
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
 
   dimension: category {
-    label: "Category"
+    label: "カテゴリー"
     sql: TRIM(${TABLE}.category) ;;
     drill_fields: [department, brand, item_name]
   }
 
   dimension: item_name {
-    label: "Item Name"
+    label: "商品名"
     sql: TRIM(${TABLE}.name) ;;
     drill_fields: [id]
   }
 
   dimension: brand {
-    label: "Brand"
+    label: "ブランド"
     sql: TRIM(${TABLE}.brand) ;;
     drill_fields: [item_name]
     link: {
@@ -114,7 +114,7 @@ view: products {
   }
 
   dimension: retail_price {
-    label: "Retail Price"
+    label: "小売価格"
     type: number
     sql: ${TABLE}.retail_price ;;
     action: {
@@ -168,7 +168,7 @@ view: products {
   }
 
   dimension: department {
-    label: "Department"
+    label: "部署"
     sql: TRIM(${TABLE}.department) ;;
   }
 
@@ -178,7 +178,7 @@ view: products {
   }
 
   dimension: distribution_center_id {
-    label: "Distribution Center ID"
+    label: "配送センターID"
     type: number
     sql: CAST(${TABLE}.distribution_center_id AS INT64) ;;
   }
@@ -186,20 +186,20 @@ view: products {
   ## MEASURES ##
 
   measure: count {
-    label: "Count"
+    label: "商品数"
     type: count
     drill_fields: [detail*]
   }
 
   measure: brand_count {
-    label: "Brand Count"
+    label: "ブランド数"
     type: count_distinct
     sql: ${brand} ;;
     drill_fields: [brand, detail2*, -brand_count] # show the brand, a bunch of counts (see the set below), don't show the brand count, because it will always be 1
   }
 
   measure: category_count {
-    label: "Category Count"
+    label: "カテゴリー数"
     alias: [category.count]
     type: count_distinct
     sql: ${category} ;;
@@ -207,7 +207,7 @@ view: products {
   }
 
   measure: department_count {
-    label: "Department Count"
+    label: "部署数"
     alias: [department.count]
     type: count_distinct
     sql: ${department} ;;
@@ -216,7 +216,7 @@ view: products {
 
   measure: prefered_categories {
     hidden: yes
-    label: "Prefered Categories"
+    label: "好みのカテゴリー"
     type: list
     list_field: category
     #order_by_field: order_items.count
@@ -225,7 +225,7 @@ view: products {
 
   measure: prefered_brands {
     hidden: yes
-    label: "Prefered Brand"
+    label: "好みのブランド"
     type: list
     list_field: brand
     #order_by_field: count

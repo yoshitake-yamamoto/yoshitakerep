@@ -1,5 +1,5 @@
 - dashboard: business_pulse
-  title: Business Pulse ぱるっす！
+  title: EC基本ダッシュボード
   layout: newspaper
   preferred_viewer: dashboards
   description: ''
@@ -28,7 +28,7 @@
       users.created_date: 7 days
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: goal, label: Goal, expression: '10000', value_format: !!null '',
+    dynamic_fields: [{table_calculation: goal, label: 目標, expression: '10000', value_format: !!null '',
         value_format_name: decimal_0, _kind_hint: dimension, _type_hint: number}]
     query_timezone: America/Los_Angeles
     custom_color_enabled: false
@@ -44,7 +44,7 @@
     colors: ["#5245ed", "#a2dcf3", "#776fdf", "#1ea8df", "#49cec1", "#776fdf", "#49cec1",
       "#1ea8df", "#a2dcf3", "#776fdf", "#776fdf", "#635189"]
     text_color: black
-    single_value_title: New Users Acquired
+    single_value_title: 新規顧客獲得数
     custom_color: forestgreen
     hidden_fields: []
     y_axes: []
@@ -64,7 +64,7 @@
     col: 0
     width: 4
     height: 4
-  - title: Average Order Sale Price
+  - title: 平均受注単価
     name: Average Order Sale Price
     model: thelook_jp
     explore: order_items
@@ -147,7 +147,7 @@
     col: 4
     width: 4
     height: 4
-  - title: Orders by Day and Category
+  - title: カテゴリ別受注数推移
     name: Orders by Day and Category
     model: thelook_jp
     explore: order_items
@@ -858,9 +858,9 @@
     col: 12
     width: 4
     height: 4
-  - name: "<span class='fa fa-users'> </span> Customer Demographics"
+  - name: "<span class='fa fa-users'> </span>顧客統計"
     type: text
-    title_text: "<span class='fa fa-users'> </span> Customer Demographics"
+    title_text: "<span class='fa fa-users'> </span>顧客統計"
     subtitle_text: Who are our customers?
     row: 12
     col: 0
@@ -949,9 +949,9 @@
     col: 10
     width: 14
     height: 7
-  - name: "<span class='fa fa-laptop'> </span> Web Analytics"
+  - name: "<span class='fa fa-laptop'> </span> Webアナリティクス"
     type: text
-    title_text: "<span class='fa fa-laptop'> </span> Web Analytics"
+    title_text: "<span class='fa fa-laptop'> </span> Webアナリティクス"
     subtitle_text: What are customers doing on our website?
     body_text: "**Recommended Action** Dive into successful brands to see what they're\
       \ doing that's working, drill by category or head to the Brand Analytics report"
@@ -959,9 +959,9 @@
     col: 0
     width: 24
     height: 3
-  - name: "<span class='fa fa-tachometer'> Top Line Metrics</span>"
+  - name: "<span class='fa fa-tachometer'>売上関連指標</span>"
     type: text
-    title_text: "<span class='fa fa-tachometer'> Top Line Metrics</span>"
+    title_text: "<span class='fa fa-tachometer'>売上関連指標</span>"
     subtitle_text: Are we headed in the right direction?
     row: 0
     col: 0

@@ -1,20 +1,21 @@
 view: distribution_centers {
-  view_label: "Distribution Centers"
+  view_label: "配送センター"
   sql_table_name: looker-private-demo.ecomm.distribution_centers ;;
   dimension: location {
+    label: "位置座標"
     type: location
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
   }
 
   dimension: latitude {
-    label: "Latitude"
+    label: "緯度"
     sql: ${TABLE}.latitude ;;
     hidden: yes
   }
 
   dimension: longitude {
-    label: "Longitude"
+    label: "経度"
     sql: ${TABLE}.longitude ;;
     hidden: yes
   }
@@ -27,7 +28,7 @@ view: distribution_centers {
   }
 
   dimension: name {
-    label: "Name"
+    label: ""
     sql: ${TABLE}.name ;;
   }
 }

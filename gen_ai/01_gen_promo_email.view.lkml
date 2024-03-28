@@ -107,7 +107,8 @@ view: promo_email {
   dimension: generated_text {
     label: "AI Generated Email"
     description: "Use with the user email in filter"
-    view_label: "Users"
+    view_label: "顧客マスタ"
+    hidden: yes
     type: string
     sql: JSON_VALUE(${TABLE}.generated_text) ;;
   }

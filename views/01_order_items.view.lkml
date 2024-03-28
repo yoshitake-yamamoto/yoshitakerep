@@ -1,10 +1,10 @@
 view: order_items {
   sql_table_name: looker-private-demo.ecomm.order_items ;;
-  view_label: "Order Items"
+  view_label: "受注明細"
   ########## IDs, Foreign Keys, Counts ###########
 
   dimension: id {
-    label: "ID"
+    label: "明細ID"
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -12,27 +12,27 @@ view: order_items {
   }
 
   dimension: inventory_item_id {
-    label: "Inventory Item ID"
+    label: "在庫ID"
     type: number
     hidden: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
 
   dimension: user_id {
-    label: "User Id"
+    label: "顧客ID"
     type: number
     hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
   measure: count {
-    label: "Count"
+    label: "明細行数"
     type: count
     drill_fields: [detail*]
   }
 
   measure: count_last_28d {
-    label: "Count Sold in Trailing 28 Days"
+    label: "直近28日の受注件数"
     type: count_distinct
     sql: ${id} ;;
     hidden: yes
@@ -42,14 +42,17 @@ view: order_items {
     }}
 
   measure: order_count {
-    view_label: "Orders"
+    view_label: "受注履歴"
+    label: "受注件数"
     type: count_distinct
     drill_fields: [detail*]
     sql: ${order_id};;
   }
 
   measure: first_purchase_count {
-    view_label: "Orders"
+    view_label: "受注履歴"
+    label: "初回受注件数"
+    description: "各顧客にとっての初回受注のみをカウント"
     type: count_distinct
     sql: ${order_id} ;;
     filters: {
@@ -67,7 +70,7 @@ view: order_items {
   }
 
   dimension: order_id {
-    label: "Order ID"
+    label: "受注ID"
     type: number
     sql: ${TABLE}.order_id ;;
     action: {
@@ -157,6 +160,7 @@ view: order_items {
   ########## Time Dimensions ##########
 
   dimension_group: returned {
+    label: "返品日"
     type: time
     timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.returned_at ;;
@@ -164,6 +168,7 @@ view: order_items {
   }
 
   dimension_group: shipped {
+    label: "発送日"
     type: time
     timeframes: [date, week, month, raw]
     sql: CAST(${TABLE}.shipped_at AS TIMESTAMP) ;;
@@ -171,6 +176,7 @@ view: order_items {
   }
 
   dimension_group: delivered {
+    label: "配送日"
     type: time
     timeframes: [date, week, month, raw]
     sql: CAST(${TABLE}.delivered_at AS TIMESTAMP) ;;
@@ -178,6 +184,7 @@ view: order_items {
   }
 
   dimension_group: created {
+    label: "受注日"
     type: time
     timeframes: [time, hour, date, week, month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name]
     sql: ${TABLE}.created_at ;;
@@ -185,29 +192,30 @@ view: order_items {
   }
 
   dimension: reporting_period_ytd_vs_lytd {
-    group_label: "Order Date"
+    group_label: "受注日"
+    label: "年初来_当年と昨年の比較"
     sql: CASE
         WHEN EXTRACT(YEAR from ${created_raw}) = EXTRACT(YEAR from CURRENT_TIMESTAMP())
         AND ${created_raw} < CURRENT_TIMESTAMP()
-        THEN 'This Year to Date'
+        THEN '当年 年初来'
 
       WHEN EXTRACT(YEAR from ${created_raw}) + 1 = EXTRACT(YEAR from CURRENT_TIMESTAMP())
       AND CAST(FORMAT_TIMESTAMP('%j', ${created_raw}) AS INT64) <= CAST(FORMAT_TIMESTAMP('%j', CURRENT_TIMESTAMP()) AS INT64)
-      THEN 'Last Year to Date'
+      THEN '昨年 年初来'
 
       END
       ;;
   }
 
   dimension: days_since_sold {
-    label: "Days Since Sold"
+    label: "受注後経過日数"
     hidden: yes
     sql: TIMESTAMP_DIFF(${created_raw},CURRENT_TIMESTAMP(), DAY) ;;
   }
 
   dimension: months_since_signup {
-    label: "Months Since Signup"
-    view_label: "Orders"
+    label: "会員登録後経過月数"
+    view_label: "受注履歴"
     type: number
     sql: CAST(FLOOR(TIMESTAMP_DIFF(${created_raw}, ${users.created_raw}, DAY)/30) AS INT64) ;;
   }
@@ -215,12 +223,12 @@ view: order_items {
 ########## Logistics ##########
 
   dimension: status {
-    label: "Status"
+    label: "ステータス"
     sql: ${TABLE}.status ;;
   }
 
   dimension: days_to_process {
-    label: "Days to Process"
+    label: "処理日数"
     type: number
     sql: CASE
         WHEN ${status} = 'Processing' THEN TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), ${created_raw}, DAY)*1.0
@@ -232,21 +240,21 @@ view: order_items {
 
 
   dimension: shipping_time {
-    label: "Shipping Time"
+    label: "配送日数"
     type: number
     sql: TIMESTAMP_DIFF(${delivered_raw}, ${shipped_raw}, DAY)*1.0 ;;
   }
 
 
   measure: average_days_to_process {
-    label: "Average Days to Process"
+    label: "平均処理日数"
     type: average
     value_format_name: decimal_2
     sql: ${days_to_process} ;;
   }
 
   measure: average_shipping_time {
-    label: "Average Shipping Time"
+    label: "平均配送日数"
     type: average
     value_format_name: decimal_2
     sql: ${shipping_time} ;;
@@ -255,28 +263,28 @@ view: order_items {
 ########## Financial Information ##########
 
   dimension: sale_price {
-    label: "Sale Price"
+    label: "売上"
     type: number
     value_format_name: usd
     sql: ${TABLE}.sale_price *1.10;;
   }
 
   dimension: gross_margin {
-    label: "Gross Margin"
+    label: "粗利"
     type: number
     value_format_name: usd
     sql: ${sale_price} - ${inventory_items.cost};;
   }
 
   dimension: item_gross_margin_percentage {
-    label: "Item Gross Margin Percentage"
+    label: "粗利率"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${gross_margin}/NULLIF(${sale_price},0) ;;
   }
 
   dimension: item_gross_margin_percentage_tier {
-    label: "Item Gross Margin Percentage Tier"
+    label: "粗利率ティア"
     type: tier
     sql: 100*${item_gross_margin_percentage} ;;
     tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -284,7 +292,7 @@ view: order_items {
   }
 
   measure: total_sale_price {
-    label: "Total Sale Price"
+    label: "合計売上"
     type: sum
     value_format_name: usd
     sql: ${sale_price};;
@@ -292,7 +300,7 @@ view: order_items {
   }
 
   measure: total_gross_margin {
-    label: "Total Gross Margin"
+    label: "合計粗利"
     type: sum
     value_format_name: usd
     sql: ${gross_margin} ;;
@@ -301,7 +309,7 @@ view: order_items {
   }
 
   measure: average_sale_price {
-    label: "Average Sale Price"
+    label: "売上平均額"
     type: average
     value_format_name: usd
     sql: ${sale_price} ;;
@@ -309,7 +317,7 @@ view: order_items {
   }
 
   measure: median_sale_price {
-    label: "Median Sale Price"
+    label: "売上中央値"
     type: median
     value_format_name: usd
     sql: ${sale_price} ;;
@@ -317,7 +325,7 @@ view: order_items {
   }
 
   measure: average_gross_margin {
-    label: "Average Gross Margin"
+    label: "粗利平均額"
     type: average
     value_format_name: usd
     sql: ${gross_margin} ;;
@@ -325,14 +333,15 @@ view: order_items {
   }
 
   measure: total_gross_margin_percentage {
-    label: "Total Gross Margin Percentage"
+    label: "総粗利率"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${total_gross_margin}/ nullif(${total_sale_price},0) ;;
   }
 
   measure: average_spend_per_user {
-    label: "Average Spend per User"
+    label: "顧客平均支出"
+    description: "売上の合計を顧客人数で割ったもの"
     type: number
     value_format_name: usd
     sql: 1.0 * ${total_sale_price} / nullif(${users.count},0) ;;
@@ -342,13 +351,13 @@ view: order_items {
 ########## Return Information ##########
 
   dimension: is_returned {
-    label: "Is Returned"
+    label: "返品フラグ"
     type: yesno
     sql: ${returned_raw} IS NOT NULL ;;
   }
 
   measure: returned_count {
-    label: "Returned Count"
+    label: "返品件数"
     type: count_distinct
     sql: ${id} ;;
     filters: {
@@ -359,7 +368,7 @@ view: order_items {
   }
 
   measure: returned_total_sale_price {
-    label: "Returned Total Sale Price"
+    label: "合計返品売上"
     type: sum
     value_format_name: usd
     sql: ${sale_price} ;;
@@ -370,7 +379,7 @@ view: order_items {
   }
 
   measure: return_rate {
-    label: "Return Rate"
+    label: "返品率"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${returned_count} / nullif(${count},0) ;;
@@ -381,30 +390,32 @@ view: order_items {
 ########## Repeat Purchase Facts ##########
 
   dimension: days_until_next_order {
-    label: "Days Until Next Order"
+    label: "次回注文までの日数"
     type: number
-    view_label: "Repeat Purchase Facts"
+    view_label: "リピート購入情報"
     sql: TIMESTAMP_DIFF(${created_raw},${repeat_purchase_facts.next_order_raw}, DAY) ;;
   }
 
   dimension: repeat_orders_within_30d {
-    label: "Repeat Orders within 30 Days"
+    label: "30日以内のリピート有無"
     type: yesno
-    view_label: "Repeat Purchase Facts"
+    view_label: "リピート購入情報"
     sql: ${days_until_next_order} <= 30 ;;
   }
 
   dimension: repeat_orders_within_15d{
-    label: "Repeat Orders within 15 Days"
+    label: "15日以内のリピート有無"
     type: yesno
+    view_label: "リピート購入情報"
+    hidden: yes
     sql:  ${days_until_next_order} <= 15;;
   }
 
   measure: count_with_repeat_purchase_within_30d {
-    label: "Count with Repeat Purchase within 30 Days"
+    label: "30日以内のリピート購入件数"
     type: count_distinct
     sql: ${id} ;;
-    view_label: "Repeat Purchase Facts"
+    view_label: "リピート購入情報"
 
     filters: {
       field: repeat_orders_within_30d
@@ -413,8 +424,9 @@ view: order_items {
   }
 
   measure: 30_day_repeat_purchase_rate {
-    description: "The percentage of customers who purchase again within 30 days"
-    view_label: "Repeat Purchase Facts"
+    label: "30日以内のリピート購入率"
+    description: "顧客数ベースでリピート購入率を計算"
+    view_label: "リピート購入情報"
     type: number
     value_format_name: percent_1
     sql: 1.0 * ${count_with_repeat_purchase_within_30d} / (CASE WHEN ${count} = 0 THEN NULL ELSE ${count} END) ;;

@@ -1,6 +1,6 @@
 include: "/models/**/thelook_jp.model.lkml"
 view: order_facts {
-  view_label: "Order Facts"
+  view_label: "受注履歴"
   derived_table: {
     explore_source: order_items {
       column: order_id {field: order_items.order_id_no_actions }
@@ -18,7 +18,7 @@ view: order_facts {
   }
 
   dimension: order_id {
-    label: "Order ID"
+    label: "受注ID"
     type: number
     hidden: yes
     primary_key: yes
@@ -26,39 +26,41 @@ view: order_facts {
   }
 
   dimension: items_in_order {
-    label: "Items in Order"
+    label: "受注商品数"
+    description: "一回の受注IDに含まれる商品の種類数"
     type: number
     sql: ${TABLE}.items_in_order ;;
   }
 
   dimension: order_amount {
-    label: "Order Amount"
+    label: "受注金額"
     type: number
     value_format_name: usd
     sql: ${TABLE}.order_amount ;;
   }
 
   dimension: order_cost {
-    label: "Order Cost"
+    label: "コスト"
     type: number
     value_format_name: usd
     sql: ${TABLE}.order_cost ;;
   }
 
   dimension: order_gross_margin {
-    label: "Order Gross Margin"
+    label: "受注粗利"
     type: number
     value_format_name: usd
   }
 
   dimension: order_sequence_number {
-    label: "Order Sequence Number"
+    label: "顧客別受注番号"
+    description: "その顧客にとって何回目の受注かを示す連番"
     type: number
     sql: ${TABLE}.order_sequence_number ;;
   }
 
   dimension: is_first_purchase {
-    label: "Is First Purchase"
+    label: "初回受注フラグ"
     type: yesno
     sql: ${order_sequence_number} = 1 ;;
   }

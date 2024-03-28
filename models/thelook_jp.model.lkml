@@ -1,5 +1,5 @@
 connection: "looker-private-demo"
-label: " eCommerce"
+label: "eCommerce_JP"
 include: "/queries/queries*.view" # includes all queries refinements
 include: "/views/**/*.view" # include all the views
 include: "/gen_ai/**/*.view" # include all the views
@@ -22,12 +22,12 @@ persist_with: ecommerce_etl_modified
 
 
 explore: order_items {
-  label: "(1) Orders, Items and Users"
+  label: "(1) 受注・商品・顧客"
   view_name: order_items
 
   join: order_facts {
     type: left_outer
-    view_label: "Orders"
+    #view_label: "受注"
     relationship: many_to_one
     sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
   }
@@ -39,49 +39,49 @@ explore: order_items {
   }
 
   join: inventory_items {
-    view_label: "Inventory Items"
+    #view_label: "在庫"
     #Left Join only brings in items that have been sold as order_item
     type: full_outer
     relationship: one_to_one
     sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
   }
   join: users {
-    view_label: "Users"
+    #view_label: "顧客マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
 
   join: user_order_facts {
-    view_label: "Users"
+    #view_label: "顧客マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
   }
 
   join: products {
-    view_label: "Products"
+    #view_label: "商品マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
   }
 
   join: repeat_purchase_facts {
-    view_label: "Repeat Purchase Facts"
+    #view_label: "Repeat Purchase Facts"
     relationship: many_to_one
     type: full_outer
     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
   }
 
   join: discounts {
-    view_label: "Discounts"
+    #view_label: "割引情報"
     type: inner
     relationship: one_to_many
     sql_on: ${products.id} = ${discounts.product_id} ;;
   }
 
   join: distribution_centers {
-    view_label: "Distribution Center"
+    #view_label: "配送センター"
     type: left_outer
     sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one

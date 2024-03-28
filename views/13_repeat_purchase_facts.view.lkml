@@ -1,5 +1,5 @@
 view: repeat_purchase_facts {
-  view_label: "Repeat Purchase Facts"
+  view_label: "リピート購入情報"
   derived_table: {
     #datagroup_trigger: ecommerce_etl_modified
     sql: SELECT
@@ -17,7 +17,7 @@ view: repeat_purchase_facts {
   }
 
   dimension: order_id {
-    label: "Order ID"
+    label: "受注ID"
     type: number
     hidden: yes
     primary_key: yes
@@ -25,26 +25,26 @@ view: repeat_purchase_facts {
   }
 
   dimension: next_order_id {
-    label: "Next Order ID"
+    label: "次回受注ID"
     type: number
     hidden: yes
     sql: ${TABLE}.next_order_id ;;
   }
 
   dimension: has_subsequent_order {
-    label: "Has Subsequent Order"
+    label: "次回受注有無"
     type: yesno
     sql: ${next_order_id} > 0 ;;
   }
 
   dimension: number_subsequent_orders {
-    label: "Number Subsequent Orders"
+    label: "以降の受注件数"
     type: number
     sql: ${TABLE}.number_subsequent_orders ;;
   }
 
   dimension_group: next_order {
-    label: "Next Order"
+    label: "次回受注"
     type: time
     timeframes: [raw, date]
     hidden: yes
