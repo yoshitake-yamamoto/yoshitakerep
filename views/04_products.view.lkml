@@ -168,7 +168,7 @@ view: products {
   }
 
   dimension: department {
-    label: "部署"
+    label: "メンズ/ウイメンズ"
     sql: TRIM(${TABLE}.department) ;;
   }
 

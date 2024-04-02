@@ -229,7 +229,7 @@
     col: 0
     width: 16
     height: 6
-  - title: Website Visit Volume vs Conversion Rate
+  - title: Webサイト来訪とコンバージョン率
     name: Website Visit Volume vs Conversion Rate
     model: thelook_jp
     explore: events
@@ -288,8 +288,9 @@
       events.sessions_count: line
     series_colors: {}
     series_labels:
-      sessions.overall_conversion: Conversion Rate
-      events.sessions_count: Total Visitors
+      events.unique_visitors: ユニーク来訪者数
+      sessions.overall_conversion: コンバージョン率
+      events.sessions_count: 合計来訪者数
     label_color: ["#EA8A2F", "#e9b404"]
     y_axis_orientation: [left, right]
     show_null_points: true
@@ -310,7 +311,7 @@
     col: 0
     width: 10
     height: 7
-  - title: Percent of Cohort Still Active by Traffic Source
+  - title: トラフィックソースごとの残存率推移
     name: Percent of Cohort Still Active by Traffic Source
     model: thelook_jp
     explore: order_items
@@ -399,7 +400,7 @@
     col: 10
     width: 14
     height: 7
-  - title: Total Sales, Year over Year
+  - title: 年度別売上推移
     name: Total Sales, Year over Year
     model: thelook_jp
     explore: order_items
@@ -475,7 +476,7 @@
     col: 16
     width: 8
     height: 10
-  - title: Highest Spending Users
+  - title: 地域別の平均支出額
     name: Highest Spending Users
     model: thelook_jp
     explore: order_items
@@ -548,7 +549,7 @@
     defaults_version: 1
     note_state: collapsed
     note_display: hover
-    note_text: Bubble size corresponds to average user spend
+    note_text: バブルサイズは顧客の平均支出に対応
     listen:
       State: users.state
       City: users.city
@@ -561,7 +562,7 @@
     col: 10
     width: 14
     height: 9
-  - title: User Behaviors by Traffic Source
+  - title: トラフィックソースごとのユーザーのふるまい
     name: User Behaviors by Traffic Source
     model: thelook_jp
     explore: order_items
@@ -637,7 +638,7 @@
     col: 0
     width: 10
     height: 7
-  - title: User Basic Demographic Profile
+  - title: 顧客属性　基礎統計
     name: User Basic Demographic Profile
     model: thelook_jp
     explore: order_items
@@ -720,7 +721,7 @@
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       palette_id: fb7bb53e-b77b-4ab6-8274-9d420d3d73f3
     custom_color: ''
-    single_value_title: Repeat Purchase Rate
+    single_value_title: リピート購買率
     conditional_formatting: [{type: greater than, value: 0.1, background_color: "#ffffe5",
         font_color: "#FBB555", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
@@ -837,9 +838,9 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    single_value_title: Orders This Year
+    single_value_title: 今年の注文件数
     hidden_fields: [order_items.reporting_period, order_items.created_year]
-    comparison_label: vs Same Period Last Year
+    comparison_label: vs 前年同期間
     custom_color: forestgreen
     y_axes: []
     note_state: collapsed
@@ -866,7 +867,7 @@
     col: 0
     width: 24
     height: 2
-  - title: Most Viewed Brands Online
+  - title: オンラインで閲覧されているブランド
     name: Most Viewed Brands Online
     model: thelook_jp
     explore: sessions
@@ -969,7 +970,7 @@
     height: 2
   filters:
   - name: State
-    title: State
+    title: 州
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -982,7 +983,7 @@
     listens_to_filters: [Country]
     field: users.state
   - name: City
-    title: City
+    title: 市区町村
     type: field_filter
     default_value: ''
     allow_multiple_values: false
@@ -995,7 +996,7 @@
     listens_to_filters: [State, Country]
     field: users.city
   - name: Traffic Source
-    title: Traffic Source
+    title: トラフィックソース
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1008,7 +1009,7 @@
     listens_to_filters: []
     field: users.traffic_source
   - name: User Gender
-    title: User Gender
+    title: 顧客の性別
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1021,7 +1022,7 @@
     listens_to_filters: []
     field: users.gender
   - name: Date
-    title: Date
+    title: 受注日
     type: date_filter
     default_value: 90 days
     allow_multiple_values: true
@@ -1030,7 +1031,7 @@
       type: relative_timeframes
       display: inline
   - name: Location
-    title: Location
+    title: 地域
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1040,7 +1041,7 @@
     listens_to_filters: []
     field: distribution_centers.location
   - name: Country
-    title: Country
+    title: 国
     type: field_filter
     default_value: ''
     allow_multiple_values: true
