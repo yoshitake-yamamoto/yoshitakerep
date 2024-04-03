@@ -74,7 +74,7 @@ view: order_items {
     type: number
     sql: ${TABLE}.order_id ;;
     action: {
-      label: "Send this to slack channel"
+      label: "slackチャンネルに送信"
       url: "https://hooks.zapier.com/hooks/catch/1662138/tvc3zj/"
       param: {
         name: "user_dash_link"
@@ -83,13 +83,15 @@ view: order_items {
       form_param: {
         name: "Message"
         type: textarea
-        default: "Hey,
-        Could you check out order #{{value}}. It's saying its {{status._value}},
-        but the customer is reaching out to us about it.
+        default: "お疲れ様です。
+
+        受注ID #{{value}}について確認お願いします。
+        ステータスは、「{{status._value}}」となっていますが、
+        顧客から問い合わせが来ています。
         ~{{ _user_attributes.first_name}}"
       }
       form_param: {
-        name: "Recipient"
+        name: "送信先"
         type: select
         default: "zevl"
         option: {
@@ -116,7 +118,7 @@ view: order_items {
       }
     }
     action: {
-      label: "Create Order Form"
+      label: "注文フォーム作成"
       url: "https://hooks.zapier.com/hooks/catch/2813548/oosxkej/"
       form_param: {
         name: "Order ID"

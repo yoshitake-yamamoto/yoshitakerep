@@ -72,13 +72,13 @@ view: users {
     tags: ["email"]
 
     link: {
-      label: "User Lookup Dashboard"
+      label: "ユーザー深掘りダッシュボード"
 
       url: "/dashboards/thelook_jp::customer_lookup?Email={{ value | encode_uri }}"
       icon_url: "https://cdn.icon-icons.com/icons2/2248/PNG/512/monitor_dashboard_icon_136391.png"
     }
     action: {
-      label: "Email Promotion to Customer"
+      label: "販促メール作成"
       url: "https://desolate-refuge-53336.herokuapp.com/posts"
       icon_url: "https://sendgrid.com/favicon.ico"
       param: {
@@ -88,19 +88,20 @@ view: users {
       form_param: {
         name: "Subject"
         required: yes
-        default: "Thank you {{ users.name._value }}"
+        default: "{{ users.name._value }}様、いつもありがとうございます"
       }
       form_param: {
         name: "Body"
         type: textarea
         required: yes
         default:
-        "Dear {{ users.first_name._value }},
+        "{{ users.first_name._value }}様
 
-        Thanks for your loyalty to the Look.  We'd like to offer you a 10% discount
-        on your next purchase!  Just use the code LOYAL when checking out!
+        いつもご愛顧いただきありがとうございます。
+        次回ご利用可能な10％割引クーポンを発行いたします。
 
-        Your friends at the Look"
+        次回ご注文時、クーポンコード『LOYAL』を入力してください。
+        "
       }
     }
     required_fields: [name, first_name]

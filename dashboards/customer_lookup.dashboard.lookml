@@ -1,5 +1,5 @@
 - dashboard: customer_lookup
-  title: Customer Lookup
+  title: 顧客ダッシュボード
   layout: newspaper
   description: ''
   preferred_slug: MDDG8M9Lvb1S2zq5UuhUND
@@ -11,7 +11,7 @@
     tile_text_color: "#3a4245"
     text_tile_text_color: ''
   elements:
-  - title: User Info
+  - title: 顧客情報
     name: User Info
     model: thelook_jp
     explore: order_items
@@ -37,7 +37,7 @@
     col: 0
     width: 7
     height: 6
-  - title: Lifetime Orders
+  - title: 累計受注回数
     name: Lifetime Orders
     model: thelook_jp
     explore: order_items
@@ -58,7 +58,7 @@
     col: 0
     width: 7
     height: 3
-  - title: Total Items Returned
+  - title: 返品回数
     name: Total Items Returned
     model: thelook_jp
     explore: order_items
@@ -79,7 +79,7 @@
     col: 0
     width: 7
     height: 3
-  - title: Items Order History
+  - title: 受注履歴
     name: Items Order History
     model: thelook_jp
     explore: order_items
@@ -99,7 +99,7 @@
     col: 0
     width: 16
     height: 5
-  - title: Favorite Categories
+  - title: カテゴリー比率
     name: Favorite Categories
     model: thelook_jp
     explore: order_items
@@ -130,7 +130,7 @@
     col: 16
     width: 8
     height: 5
-  - title: User Location
+  - title: 所在地
     name: User Location
     model: thelook_jp
     explore: order_items
@@ -174,41 +174,41 @@
     row: 3
     col: 7
     width: 17
-    height: 9
-  - title: Generate Promo Email
-    name: Generate Promo Email
-    model: thelook_jp
-    explore: order_items
-    type: single_value
-    fields: [users.promo_email]
-    filters:
-      order_items.created_date: 99 years
-      users.id: ''
-    sorts: [users.promo_email]
-    limit: 1
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_view_names: false
-    show_null_labels: false
-    show_row_numbers: true
-    hidden_fields: []
-    y_axes: []
-    defaults_version: 1
-    listen:
-      Email: users.email
-    row: 0
-    col: 7
-    width: 17
-    height: 3
+    height: 12
+  # - title: 販促メール生成
+  #   name: Generate Promo Email
+  #   model: thelook_jp
+  #   explore: order_items
+  #   type: single_value
+  #   fields: [users.promo_email]
+  #   filters:
+  #     order_items.created_date: 99 years
+  #     users.id: ''
+  #   sorts: [users.promo_email]
+  #   limit: 1
+  #   column_limit: 50
+  #   query_timezone: America/Los_Angeles
+  #   custom_color_enabled: true
+  #   show_single_value_title: false
+  #   show_comparison: false
+  #   comparison_type: value
+  #   comparison_reverse_colors: false
+  #   show_comparison_label: true
+  #   enable_conditional_formatting: false
+  #   conditional_formatting_include_totals: false
+  #   conditional_formatting_include_nulls: false
+  #   show_view_names: false
+  #   show_null_labels: false
+  #   show_row_numbers: true
+  #   hidden_fields: []
+  #   y_axes: []
+  #   defaults_version: 1
+  #   listen:
+  #     Email: users.email
+  #   row: 0
+  #   col: 7
+  #   width: 17
+  #   height: 3
   filters:
   - name: Email
     title: Email

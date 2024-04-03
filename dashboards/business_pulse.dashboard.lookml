@@ -562,7 +562,7 @@
     col: 10
     width: 14
     height: 9
-  - title: トラフィックソースごとのユーザーのふるまい
+  - title: トラフィックソースごとのユーザー傾向
     name: User Behaviors by Traffic Source
     model: thelook_jp
     explore: order_items
@@ -862,7 +862,7 @@
   - name: "<span class='fa fa-users'> </span>顧客統計"
     type: text
     title_text: "<span class='fa fa-users'> </span>顧客統計"
-    subtitle_text: Who are our customers?
+    subtitle_text: 顧客を理解する
     row: 12
     col: 0
     width: 24
@@ -953,9 +953,9 @@
   - name: "<span class='fa fa-laptop'> </span> Webアナリティクス"
     type: text
     title_text: "<span class='fa fa-laptop'> </span> Webアナリティクス"
-    subtitle_text: What are customers doing on our website?
-    body_text: "**Recommended Action** Dive into successful brands to see what they're\
-      \ doing that's working, drill by category or head to the Brand Analytics report"
+    subtitle_text: Web上での顧客行動を理解する
+    body_text: "<div style='text-align: center;'> <b>推奨アクション</b> ：成功しているブランドについて、\
+      \ ブランド個別ダッシュボードに移行して深堀分析をおこなう</div>"
     row: 23
     col: 0
     width: 24
@@ -963,7 +963,7 @@
   - name: "<span class='fa fa-tachometer'>売上関連指標</span>"
     type: text
     title_text: "<span class='fa fa-tachometer'>売上関連指標</span>"
-    subtitle_text: Are we headed in the right direction?
+    subtitle_text: ビジネスの概況を理解する
     row: 0
     col: 0
     width: 24
