@@ -1,7 +1,7 @@
 view: affinity {
   label: "Affinity"
   derived_table: {
-    datagroup_trigger: ecommerce_etl_modified
+    #datagroup_trigger: ecommerce_etl_modified
     sql: SELECT
           product_a_id
           , product_b_id
@@ -103,7 +103,7 @@ view: affinity {
   }
 
   measure: avg_user_affinity {
-    label: "Affinity Score (by User History)"
+    label: "親和性スコア (顧客履歴ベース)"
     description: "Percentage of users that bought both products weighted by how many times each product sold individually"
     type: average
     sql: 100.0 * ${user_affinity} ;;
@@ -111,7 +111,7 @@ view: affinity {
   }
 
   measure: avg_order_affinity {
-    label: "Affinity Score (by Order Basket)"
+    label: "親和性スコア (バスケットベース)"
     description: "Percentage of orders that contained both products weighted by how many times each product sold individually"
     type: average
     sql: 100.0 * ${order_affinity} ;;
@@ -135,7 +135,7 @@ view: affinity {
 #Table that aggregates the products purchased by user and order id
 view: user_order_product {
   derived_table: {
-    datagroup_trigger: ecommerce_etl_modified
+#   datagroup_trigger: ecommerce_etl_modified
     sql: SELECT
         oi.user_id AS user_id
         , p.id AS prod_id
@@ -143,7 +143,7 @@ view: user_order_product {
       FROM looker-private-demo.ecomm.order_items oi
       LEFT JOIN looker-private-demo.ecomm.inventory_items ii
         ON oi.inventory_item_id = ii.id
-      LEFT JOIN looker-private-demo.ecomm. products p
+      LEFT JOIN looker-private-demo.ecomm.products p
         ON ii.product_id = p.id
       GROUP BY 1,2,3
        ;;
@@ -177,7 +177,7 @@ view: user_order_product {
 #Table to count the total times a product id has been purchased
 view: total_order_product {
   derived_table: {
-    datagroup_trigger: ecommerce_etl_modified
+    #datagroup_trigger: ecommerce_etl_modified
     sql: SELECT
         p.id AS prod_id
         , COUNT(*) AS prod_freq

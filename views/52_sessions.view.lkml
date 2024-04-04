@@ -25,7 +25,7 @@ view: sessions {
   #####  Basic Web Info  ########
 
   measure: count {
-    label: "Count"
+    label: "セッション数"
     type: count
     drill_fields: [detail*]
   }
@@ -260,6 +260,7 @@ view: sessions {
   }
 
   measure: cart_to_checkout_conversion {
+    label: "CVR（購買/カート）"
     view_label: "Funnel View"
     type: number
     value_format_name: percent_2

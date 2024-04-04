@@ -37,14 +37,14 @@ view: products {
       icon_url: "https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg"
     }
     link: {
-      label: "{{value}} Analytics Dashboard"
+      label: "{{value}} 分析ダッシュボード"
       url: "/dashboards/thelook_jp::brand_lookup?Brand%20Name={{ value | encode_uri }}"
       #url: "/dashboards/IOlEDOPQ12RFCyuUqk38wB?Brand%20Name={{ value | encode_uri }}"
       icon_url: "https://www.seekpng.com/png/full/138-1386046_google-analytics-integration-analytics-icon-blue-png.png"
     }
 
     action: {
-      label: "Email Brand Promotion to Cohort"
+      label: "ブランドプロモーションメールを送信"
       url: "https://desolate-refuge-53336.herokuapp.com/posts"
       icon_url: "https://sendgrid.com/favicon.ico"
       param: {
@@ -54,23 +54,23 @@ view: products {
       form_param: {
         name: "Subject"
         required: yes
-        default: "Last Chance! 20% off {{ value }}"
+        default: "ラストチャンス! 20% off {{ value }}"
       }
       form_param: {
         name: "Body"
         type: textarea
         required: yes
         default:
-        "Dear Valued Customer,
+        "お客様各位
 
-        We appreciate your continue support and loyalty and wanted to show our appreciation. Offering a 15% discount on ALL products for our favorite brand {{ value }}.
-        Just used code {{ value | upcase }}-MANIA on your next checkout!
-
-        Your friends at the Look"
+        平素は格別のご愛顧を賜り、厚く御礼申し上げます。
+        今回は、{{ value }}ブランドの全商品を15%割引でご提供いたします。
+        次回のお会計時にコード「{{ value | upcase }}-MANIA」を入力してください。
+        "
       }
     }
     action: {
-      label: "Start Adwords Campaign"
+      label: "広告キャンペーンを開始"
       url: "https://desolate-refuge-53336.herokuapp.com/posts"
       icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
       param: {
@@ -79,6 +79,7 @@ view: products {
       }
       form_param: {
         type: select
+        label: "キャンペーンタイプ"
         name: "Campaign Type"
         option: { name: "Spend" label: "Spend" }
         option: { name: "Leads" label: "Leads" }
@@ -86,6 +87,7 @@ view: products {
         required: yes
       }
       form_param: {
+        label: "キャンペーン名"
         name: "Campaign Name"
         type: string
         required: yes
@@ -93,6 +95,7 @@ view: products {
       }
 
       form_param: {
+        label: "商品カテゴリー"
         name: "Product Category"
         type: string
         required: yes
@@ -100,12 +103,14 @@ view: products {
       }
 
       form_param: {
+        label: "予算"
         name: "Budget"
         type: string
         required: yes
       }
 
       form_param: {
+        label: "キーワード"
         name: "Keywords"
         type: string
         required: yes
@@ -119,7 +124,7 @@ view: products {
     type: number
     sql: ${TABLE}.retail_price ;;
     action: {
-      label: "Update Price"
+      label: "更新価格"
       url: "https://us-central1-sandbox-trials.cloudfunctions.net/ecomm_inventory_writeback"
       param: {
         name: "Price"
@@ -127,7 +132,7 @@ view: products {
       }
       form_param: {
         name: "Discount"
-        label: "Discount Tier"
+        label: "割引ティア"
         type: select
         option: {
           name: "5% off"

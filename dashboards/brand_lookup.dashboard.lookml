@@ -1,5 +1,5 @@
 - dashboard: brand_lookup
-  title: Brand Lookup
+  title: ブランド深掘りダッシュボード
   layout: newspaper
   preferred_viewer: dashboards-next
   query_timezone: user_timezone
@@ -17,7 +17,7 @@
     # show_tile_shadow: false
     text_tile_text_color: "#556d7a"
   elements:
-  - title: Total Orders
+  - title: 合計受注回数
     name: Total Orders
     model: thelook_jp
     explore: order_items
@@ -37,7 +37,7 @@
     col: 8
     width: 4
     height: 3
-  - title: Total Customers
+  - title: 顧客数
     name: Total Customers
     model: thelook_jp
     explore: order_items
@@ -51,7 +51,7 @@
     text_color: black
     note_state: expanded
     note_display: hover
-    note_text: I've added a note
+    note_text: このブランドを購入したユニークな顧客人数
     listen:
       Brand Name: products.brand
       Date: order_items.created_date
@@ -60,7 +60,7 @@
     col: 0
     width: 4
     height: 3
-  - title: Average Order Value
+  - title: 平均受注額
     name: Average Order Value
     model: thelook_jp
     explore: order_items
@@ -84,7 +84,7 @@
     col: 4
     width: 4
     height: 3
-  - title: Brand Traffic by Source, OS
+  - title: OS、ソース別トラフィック比率
     name: Brand Traffic by Source, OS
     model: thelook_jp
     explore: events
@@ -132,7 +132,7 @@
     col: 14
     width: 10
     height: 11
-  - title: Top Product Categories - Cart vs Conversion
+  - title: 上位商品カテゴリー：カート vs コンバージョン
     name: Top Product Categories - Cart vs Conversion
     model: thelook_jp
     explore: events
@@ -212,7 +212,7 @@
     col: 0
     width: 14
     height: 6
-  - title: Top Visitors and Transaction History
+  - title: 来訪回数上位顧客
     name: Top Visitors and Transaction History
     model: thelook_jp
     explore: events
@@ -224,7 +224,7 @@
     limit: 15
     column_limit: 50
     query_timezone: America/Los_Angeles
-    show_view_names: true
+    show_view_names: false
     show_row_numbers: true
     transpose: false
     truncate_text: true
@@ -253,7 +253,7 @@
     col: 12
     width: 12
     height: 8
-  - title: Sales and Sale Price Trend
+  - title: 売上トレンド
     name: Sales and Sale Price Trend
     model: thelook_jp
     explore: order_items
@@ -292,7 +292,7 @@
       palette_id: google-categorical-0
       options:
         steps: 5
-    y_axis_labels: [Total Sale Amount, Average Selling Price]
+    #y_axis_labels: [Total Sale Amount, Average Selling Price]
     x_axis_label: Order Date
     hide_legend: true
     colors: ["#F2B431", "#57BEBE"]
@@ -313,7 +313,7 @@
     col: 12
     width: 12
     height: 7
-  - title: Top Purchasers of Brand
+  - title: 受注回数上位顧客
     name: Top Purchasers of Brand
     model: thelook_jp
     explore: order_items
@@ -345,7 +345,7 @@
     col: 0
     width: 12
     height: 8
-  - title: Website Sessions by Hour of Day and User Lifetime Order Tier
+  - title: 時間帯別のセッション数（顧客生涯受注回数ティア別）
     name: Website Sessions by Hour of Day and User Lifetime Order Tier
     model: thelook_jp
     explore: events
@@ -412,7 +412,7 @@
     col: 0
     width: 14
     height: 5
-  - title: Most Correlated Items
+  - title: 相関の強い商品
     name: Most Correlated Items
     model: thelook_jp
     explore: affinity
@@ -503,7 +503,7 @@
     col: 0
     width: 14
     height: 8
-  - title: Purchasers of This Brand Also Bought (Brand Affinity)
+  - title: 別ブランドとの親和性
     name: Purchasers of This Brand Also Bought (Brand Affinity)
     model: thelook_jp
     explore: affinity
@@ -517,7 +517,7 @@
     limit: 15
     column_limit: 50
     query_timezone: America/Los_Angeles
-    show_view_names: true
+    show_view_names: false
     show_row_numbers: true
     transpose: false
     truncate_text: true
@@ -525,7 +525,7 @@
     hide_row_totals: false
     size_to_fit: true
     series_labels:
-      product_b.brand: Brand Name
+      product_b.brand: ブランド名
     series_cell_visualizations:
       affinity.avg_order_affinity:
         is_active: true
@@ -579,7 +579,7 @@
     col: 14
     width: 10
     height: 8
-  - title: Brand Share of Wallet over Customer Lifetime
+  - title: 顧客ライフサイクルとブランドシェア
     name: Brand Share of Wallet over Customer Lifetime
     model: thelook_jp
     explore: orders_with_share_of_wallet_application
@@ -640,7 +640,7 @@
     col: 12
     width: 12
     height: 6
-  - title: Most Popular Categories
+  - title: 商品カテゴリーランキング
     name: Most Popular Categories
     model: thelook_jp
     explore: order_items
@@ -702,43 +702,43 @@
     height: 10
   - name: "<span class='fa fa-dollar'> Brand Overview </span>"
     type: text
-    title_text: "<span class='fa fa-dollar'> Brand Overview </span>"
-    subtitle_text: What are the high level revenue metrics for this brand?
+    title_text: "<span class='fa fa-dollar'> ブランド概況 </span>"
+    subtitle_text: ブランドの主要指標を理解する
     row: 0
     col: 0
     width: 24
     height: 2
   - name: "<span class='fa fa-heart'> Affinity Analysis </span>"
     type: text
-    title_text: "<span class='fa fa-heart'> Affinity Analysis </span>"
-    subtitle_text: What products and brands have the highest affinity?
-    body_text: "**Recommended Action** Plan advertising campaign to recommend products\
-      \ to users based on affinity"
+    title_text: "<span class='fa fa-heart'> 親和性分析 </span>"
+    subtitle_text: このブランドと親和性の高い商品・ブランドを理解する
+    body_text: "<div style='text-align: center;'><b>推奨アクション</b> 親和性に基づいて、\
+      \ レコメンドキャンペーンを検討する</div>"
     row: 15
     col: 0
     width: 24
     height: 3
   - name: "<span class='fa fa-laptop'> Web Analytics </span>"
     type: text
-    title_text: "<span class='fa fa-laptop'> Web Analytics </span>"
-    subtitle_text: How are users interacting with our website?
+    title_text: "<span class='fa fa-laptop'> Web分析</span>"
+    subtitle_text: 顧客のWeb上での行動を理解する
     row: 26
     col: 0
     width: 24
     height: 2
   - name: "<span class='fa fa-users'> Top Customers </span>"
     type: text
-    title_text: "<span class='fa fa-users'> Top Customers </span>"
-    subtitle_text: Who are our highest valued customers?
-    body_text: "**Recommended Action** Explore from here to see what products a user\
-      \ has purchased and include them in a targeted advertising campaign"
+    title_text: "<span class='fa fa-users'> 上位顧客 </span>"
+    subtitle_text: お得意様を理解する
+    body_text: "<div style='text-align: center;'><b>推奨アクション</b> 各顧客がどんな商品を購入しているか確認し、\
+      \ 1to1の宣伝アクションをおこなう</div>"
     row: 39
     col: 0
     width: 24
     height: 3
   filters:
   - name: Brand Name
-    title: Brand Name
+    title: ブランド
     type: field_filter
     default_value: Calvin Klein
     allow_multiple_values: true
@@ -748,13 +748,13 @@
     listens_to_filters: []
     field: products.brand
   - name: Date
-    title: Date
+    title: 日付
     type: date_filter
     default_value: 90 days
     allow_multiple_values: true
     required: false
   - name: State
-    title: State
+    title: 州
     type: field_filter
     default_value: ''
     allow_multiple_values: true

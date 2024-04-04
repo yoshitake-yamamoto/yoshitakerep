@@ -902,7 +902,8 @@
     truncate_header: false
     minimum_column_width: 75
     series_labels:
-      sessions.cart_to_checkout_conversion: Cart Conversion
+      #sessions.cart_to_checkout_conversion: Cart Conversion
+      sessions.cart_to_checkout_conversion: CVR（購買/カート）
     series_cell_visualizations:
       sessions.count:
         is_active: true

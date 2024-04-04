@@ -72,7 +72,7 @@ view: order_items_share_of_wallet {
   }
 
   measure: total_sale_price_this_brand {
-    label: "Total Sale Price This Brand"
+    label: "当該ブランド合計売上"
     view_label: "Share of Wallet (Item Level)"
     type: sum
     hidden: yes
@@ -117,6 +117,7 @@ view: order_items_share_of_wallet {
   }
 
   measure: brand_share_of_wallet_within_company {
+    label: "当該ブランド売上シェア"
     view_label: "Share of Wallet (Brand Level)"
     description: "This brand's sales over all sales across website"
     value_format_name: percent_2
