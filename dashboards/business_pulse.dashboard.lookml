@@ -147,7 +147,7 @@
     col: 4
     width: 4
     height: 4
-  - title: カテゴリ別受注数推移
+  - title: カテゴリー別受注数推移
     name: Orders by Day and Category
     model: thelook_jp
     explore: order_items

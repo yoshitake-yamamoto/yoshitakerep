@@ -224,7 +224,7 @@ view: users {
 
   dimension: approx_location {
     label: "住所座標(概算)"
-    hidden: yes
+    #hidden: yes
     type: location
     drill_fields: [location]
     sql_latitude: ${approx_latitude} ;;
