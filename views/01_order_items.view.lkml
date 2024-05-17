@@ -194,7 +194,6 @@ view: order_items {
   }
 
   dimension: reporting_period_ytd_vs_lytd {
-    group_label: "受注日"
     label: "年初来_当年と昨年の比較"
     sql: CASE
         WHEN EXTRACT(YEAR from ${created_raw}) = EXTRACT(YEAR from CURRENT_TIMESTAMP())
@@ -228,6 +227,7 @@ view: order_items {
     label: "ステータス"
     sql: ${TABLE}.status ;;
   }
+
 
   dimension: days_to_process {
     label: "処理日数"
@@ -268,7 +268,7 @@ view: order_items {
     label: "売上"
     type: number
     value_format_name: usd
-    sql: ${TABLE}.sale_price ;;
+    sql: ${TABLE}.sale_price;;
   }
 
   dimension: gross_margin {
