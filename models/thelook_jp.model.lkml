@@ -100,7 +100,60 @@ explore: order_items {
 }
 
 
+explore: order_items_BQML {
+  label: "(9) for BQML cluster"
+  view_name: order_items
 
+  join: order_facts {
+    type: left_outer
+    #view_label: "受注"
+    relationship: many_to_one
+    sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
+  }
+
+  join: inventory_items {
+    #view_label: "在庫"
+    #Left Join only brings in items that have been sold as order_item
+    type: full_outer
+    relationship: one_to_one
+    sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
+  }
+  join: users {
+    #view_label: "顧客マスタ"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${order_items.user_id} = ${users.id} ;;
+  }
+
+  join: user_order_facts {
+    #view_label: "顧客マスタ"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
+  }
+
+  join: products {
+    #view_label: "商品マスタ"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${products.id} = ${inventory_items.product_id} ;;
+  }
+
+  join: repeat_purchase_facts {
+    #view_label: "Repeat Purchase Facts"
+    relationship: many_to_one
+    type: full_outer
+    sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
+  }
+
+  join: discounts {
+    #view_label: "割引情報"
+    type: inner
+    relationship: one_to_many
+    sql_on: ${products.id} = ${discounts.product_id} ;;
+  }
+
+}
 
 
 

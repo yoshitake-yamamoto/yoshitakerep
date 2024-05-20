@@ -295,6 +295,7 @@ view: order_items {
 
   measure: total_sale_price {
     label: "合計売上"
+    description: "収益の合計金額。受注日を基準とし、受注額を単純に足し合わせたもの"
     type: sum
     value_format_name: usd
     sql: ${sale_price};;
