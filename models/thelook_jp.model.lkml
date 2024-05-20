@@ -146,12 +146,13 @@ explore: order_items_BQML {
     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
   }
 
-  join: discounts {
-    #view_label: "割引情報"
-    type: inner
-    relationship: one_to_many
-    sql_on: ${products.id} = ${discounts.product_id} ;;
-  }
+  # join: discounts {
+  #   #view_label: "割引情報"
+  #   type: inner
+  #   relationship: one_to_many
+  #   sql_on: ${products.id} = ${discounts.product_id} ;;
+  # }
+
 
 }
 
