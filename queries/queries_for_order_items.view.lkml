@@ -19,10 +19,10 @@ explore: +order_items {
 explore: +order_items {
   query: year_over_year {
     description: "Suitable for line chart comparing monthly sales over the last four years"
-    dimensions: [created_month_name, created_year]
+    dimensions: [created_month_num, created_year]
     pivots: [created_year]
     measures: [total_sale_price]
-    sorts: [created_month_name: asc]
+    sorts: [created_month_num: asc]
     filters: [
       order_items.created_date: "before 0 months ago",
       order_items.created_year: "4 years"

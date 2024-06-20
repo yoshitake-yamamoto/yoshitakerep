@@ -405,13 +405,13 @@
     model: thelook_jp
     explore: order_items
     type: looker_line
-    fields: [order_items.created_month_name, order_items.total_sale_price, order_items.created_year]
+    fields: [order_items.created_month_num, order_items.total_sale_price, order_items.created_year]
     pivots: [order_items.created_year]
-    fill_fields: [order_items.created_month_name]
+    fill_fields: [order_items.created_month_num]
     filters:
       order_items.created_date: before 0 months ago
       order_items.created_year: 4 years
-    sorts: [order_items.created_year desc 0, order_items.created_month_name]
+    sorts: [order_items.created_year desc 0, order_items.created_month_num]
     limit: 500
     column_limit: 50
     query_timezone: America/Los_Angeles

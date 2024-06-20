@@ -27,7 +27,6 @@ explore: order_items {
 
   join: order_facts {
     type: left_outer
-    #view_label: "受注"
     relationship: many_to_one
     sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
   }
@@ -39,28 +38,24 @@ explore: order_items {
   }
 
   join: inventory_items {
-    #view_label: "在庫"
     #Left Join only brings in items that have been sold as order_item
     type: full_outer
     relationship: one_to_one
     sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
   }
   join: users {
-    #view_label: "顧客マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
 
   join: user_order_facts {
-    #view_label: "顧客マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
   }
 
   join: products {
-    #view_label: "商品マスタ"
     type: left_outer
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
@@ -74,14 +69,12 @@ explore: order_items {
   }
 
   join: discounts {
-    #view_label: "割引情報"
     type: inner
     relationship: one_to_many
     sql_on: ${products.id} = ${discounts.product_id} ;;
   }
 
   join: distribution_centers {
-    #view_label: "配送センター"
     type: left_outer
     sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one
@@ -100,79 +93,24 @@ explore: order_items {
 }
 
 
-explore: order_items_BQML {
-  label: "(9) for BQML cluster"
-  view_name: order_items
-
-  join: order_facts {
-    type: left_outer
-    #view_label: "受注"
-    relationship: many_to_one
-    sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
-  }
-
-  join: inventory_items {
-    #view_label: "在庫"
-    #Left Join only brings in items that have been sold as order_item
-    type: full_outer
-    relationship: one_to_one
-    sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
-  }
-  join: users {
-    #view_label: "顧客マスタ"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${order_items.user_id} = ${users.id} ;;
-  }
-
-  join: user_order_facts {
-    #view_label: "顧客マスタ"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
-  }
-
-  join: products {
-    #view_label: "商品マスタ"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${products.id} = ${inventory_items.product_id} ;;
-  }
-
-  join: repeat_purchase_facts {
-    #view_label: "Repeat Purchase Facts"
-    relationship: many_to_one
-    type: full_outer
-    sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
-  }
-
-  # join: discounts {
-  #   #view_label: "割引情報"
-  #   type: inner
-  #   relationship: one_to_many
-  #   sql_on: ${products.id} = ${discounts.product_id} ;;
-  # }
-
-
-}
 
 
 
 #########  Event Data Explores #########
 
 explore: events {
-  label: "(2) Web Event Data"
+  label: "(2) Webイベントデータ"
   # sql_always_where: ${product_viewed.brand} in ({{ _user_attributes['brand'] }}) ;;
 
   join: sessions {
-    view_label: "Sessions"
+    view_label: "セッション"
     type: left_outer
     sql_on: ${events.session_id} =  ${sessions.session_id} ;;
     relationship: many_to_one
   }
 
   join: session_landing_page {
-    view_label: "Session Landing Page"
+    view_label: "セッションランディングページ"
     from: events
     type: left_outer
     sql_on: ${sessions.landing_event_id} = ${session_landing_page.event_id} ;;
@@ -181,7 +119,7 @@ explore: events {
   }
 
   join: session_bounce_page {
-    view_label: "Session Bounce Page"
+    view_label: "セッションバウンスページ"
     from: events
     type: left_outer
     sql_on: ${sessions.bounce_event_id} = ${session_bounce_page.event_id} ;;
@@ -190,7 +128,7 @@ explore: events {
   }
 
   join: product_viewed {
-    view_label: "Product Viewed"
+    view_label: "閲覧された商品"
     from: products
     type: left_outer
     sql_on: ${events.viewed_product_id} = ${product_viewed.id} ;;
@@ -198,7 +136,7 @@ explore: events {
   }
 
   join: users {
-    view_label: "Users"
+    view_label: "顧客マスタ"
     type: left_outer
     sql_on: ${sessions.session_user_id} = ${users.id} ;;
     relationship: many_to_one
@@ -208,12 +146,12 @@ explore: events {
     type: left_outer
     sql_on: ${users.id} = ${user_order_facts.user_id} ;;
     relationship: one_to_one
-    view_label: "Users"
+    view_label: "顧客マスタ"
   }
 }
 
 explore: sessions {
-  label: "(3) Web Session Data"
+  label: "(3) Webセッションデータ"
   # sql_always_where: ${product_viewed.brand} in ({{ _user_attributes['brand'] }}) ;;
 
   join: events {
@@ -268,7 +206,7 @@ explore: sessions {
 #########  Advanced Extensions #########
 
 explore: affinity {
-  label: "(4) Affinity Analysis"
+  label: "(4) アフィニティ分析"
 
   always_filter: {
     filters: {
@@ -295,7 +233,7 @@ explore: affinity {
 }
 
 explore: orders_with_share_of_wallet_application {
-  label: "(5) Share of Wallet Analysis"
+  label: "(5) シェア分析"
   extends: [order_items]
   view_name: order_items
 
@@ -305,7 +243,7 @@ explore: orders_with_share_of_wallet_application {
 }
 
 explore: journey_mapping {
-  label: "(6) Customer Journey Mapping"
+  label: "(6) カスタマージャーニーマッピング"
   extends: [order_items]
   view_name: order_items
 
@@ -342,7 +280,7 @@ explore: journey_mapping {
 }
 
 explore: inventory_snapshot {
-  label: "(7) Historical Stock Snapshot Analysis"
+  label: "(7) 在庫スナップショット分析"
   join: trailing_sales_snapshot {
     sql_on: ${inventory_snapshot.product_id}=${trailing_sales_snapshot.product_id}
       AND ${inventory_snapshot.snapshot_date}=${trailing_sales_snapshot.snapshot_date};;
@@ -366,16 +304,16 @@ explore: inventory_snapshot {
 }
 
 
-explore: kitten_order_items {
-  label: "Order Items (Kittens)"
-  hidden: yes
-  extends: [order_items]
+# explore: kitten_order_items {
+#   label: "Order Items (Kittens)"
+#   hidden: yes
+#   extends: [order_items]
 
-  join: users {
-    view_label: "Kittens"
-    from: kitten_users
-  }
-}
+#   join: users {
+#     view_label: "Kittens"
+#     from: kitten_users
+#   }
+# }
 
 ######### Cohort Analysis BQML #########
 explore: ecomm_training_info {
@@ -400,7 +338,7 @@ explore: kmeans_model5 {}
 
 
 explore: ecomm_predict {
-  label: "(8) Cohort Analysis"
+  label: "(8) コホート分析"
   fields: [ALL_FIELDS*,-centroid_id, -user_id]
   join: users {
     type: left_outer
@@ -438,3 +376,60 @@ explore: ecomm_predict {
     sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
   }
 }
+
+
+# explore: order_items_BQML {
+#   label: "(9) for BQML cluster"
+#   view_name: order_items
+
+#   join: order_facts {
+#     type: left_outer
+#     #view_label: "受注"
+#     relationship: many_to_one
+#     sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
+#   }
+
+#   join: inventory_items {
+#     #view_label: "在庫"
+#     #Left Join only brings in items that have been sold as order_item
+#     type: full_outer
+#     relationship: one_to_one
+#     sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
+#   }
+#   join: users {
+#     #view_label: "顧客マスタ"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${order_items.user_id} = ${users.id} ;;
+#   }
+
+#   join: user_order_facts {
+#     #view_label: "顧客マスタ"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
+#   }
+
+#   join: products {
+#     #view_label: "商品マスタ"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${products.id} = ${inventory_items.product_id} ;;
+#   }
+
+#   join: repeat_purchase_facts {
+#     #view_label: "Repeat Purchase Facts"
+#     relationship: many_to_one
+#     type: full_outer
+#     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
+#   }
+
+#   # join: discounts {
+#   #   #view_label: "割引情報"
+#   #   type: inner
+#   #   relationship: one_to_many
+#   #   sql_on: ${products.id} = ${discounts.product_id} ;;
+#   # }
+
+
+# }

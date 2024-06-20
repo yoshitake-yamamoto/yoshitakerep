@@ -185,13 +185,80 @@ view: order_items {
 
   }
 
-  dimension_group: created {
-    label: "受注日"
-    type: time
-    timeframes: [time, hour, date, week, month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name]
+  # 受注日の日本語化 --------------------------------------------------------
+  dimension: created_year{
+    group_label: "受注日"
+    group_item_label: "年(YYYY)"
+    type: date_year
     sql: ${TABLE}.created_at ;;
-    #order_by_field: created_month_num
   }
+
+  dimension: created_month{
+    group_label: "受注日"
+    group_item_label: "年月(YYYY-MM)"
+    type: date_month
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_month_num{
+    group_label: "受注日"
+    group_item_label: "月(MM)"
+    type: date_month_num
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_date{
+    group_label: "受注日"
+    group_item_label: "年月日(YYYY-MM-DD)"
+    type: date
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_day_of_week{
+    group_label: "受注日"
+    group_item_label: "曜日"
+    type: date_day_of_week
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_hour{
+    group_label: "受注日"
+    group_item_label: "時間(HH)"
+    type: date_hour_of_day
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_time{
+    group_label: "受注日"
+    group_item_label: "日時"
+    type: date_time
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_raw{
+    hidden: yes
+    group_label: "受注日"
+    type: date_raw
+    sql: ${TABLE}.created_at ;;
+  }
+
+
+  dimension: created_week{
+    group_label: "受注日"
+    group_item_label: "週"
+    type: date_week
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_week_of_year{
+    group_label: "受注日"
+    group_item_label: "週番号"
+    type: date_week_of_year
+    sql: ${TABLE}.created_at ;;
+  }
+
+  #---------------------------------------------------------------------------
+
 
   dimension: reporting_period_ytd_vs_lytd {
     label: "年初来_当年と昨年の比較"
