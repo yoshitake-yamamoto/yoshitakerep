@@ -59,6 +59,7 @@ view: order_items {
       field: order_facts.is_first_purchase
       value: "Yes"
     }
+
     drill_fields: [user_id, users.name, users.email, order_id, created_date, users.traffic_source]
   }
 

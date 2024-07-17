@@ -21,6 +21,7 @@ persist_with: ecommerce_etl_modified
 ############ Base Explores #############
 
 
+
 explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
@@ -56,7 +57,7 @@ explore: order_items {
   }
 
   join: products {
-    type: left_outer
+    type: full_outer
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
   }

@@ -229,11 +229,11 @@ view: users {
     drill_fields: [location]
     sql_latitude: ${approx_latitude} ;;
     sql_longitude: ${approx_longitude} ;;
-    link: {
-      label: "Google Directions from {{ distribution_centers.name._value }}"
-      url: "{% if distribution_centers.location._in_query %}https://www.google.com/maps/dir/'{{ distribution_centers.latitude._value }},{{ distribution_centers.longitude._value }}'/'{{ approx_latitude._value }},{{ approx_longitude._value }}'{% endif %}"
-      icon_url: "http://www.google.com/s2/favicons?domain=www.google.com"
-    }
+    # link: {
+    #   label: "Google Directions from {{ distribution_centers.name._value }}"
+    #   url: "{% if distribution_centers.location._in_query %}https://www.google.com/maps/dir/'{{ distribution_centers.latitude._value }},{{ distribution_centers.longitude._value }}'/'{{ approx_latitude._value }},{{ approx_longitude._value }}'{% endif %}"
+    #   icon_url: "http://www.google.com/s2/favicons?domain=www.google.com"
+    # }
 
   }
 
