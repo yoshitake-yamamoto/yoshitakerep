@@ -368,6 +368,7 @@ view: order_items {
     value_format_name: usd
     sql: ${sale_price};;
     drill_fields: [detail*]
+
   }
 
   measure: total_gross_margin {
@@ -503,6 +504,7 @@ view: order_items {
     sql: 1.0 * ${count_with_repeat_purchase_within_30d} / (CASE WHEN ${count} = 0 THEN NULL ELSE ${count} END) ;;
     drill_fields: [products.brand, order_count, count_with_repeat_purchase_within_30d]
   }
+
 
 ########## Dynamic Sales Cohort App ##########
 

@@ -31,7 +31,7 @@ view: sessions {
   }
 
   dimension: session_id {
-    label: "Session ID"
+    label: "セッションID"
     type: string
     primary_key: yes
     tags: ["mp_session_id"]
@@ -39,50 +39,50 @@ view: sessions {
   }
 
   dimension: session_user_id {
-    label: "Session User ID"
+    label: "セッションユーザーID"
     tags: ["mp_session_uuid"]
     sql: ${TABLE}.session_user_id ;;
   }
 
   dimension: landing_event_id {
-    label: "Landing Event ID"
+    label: "ランディングイベントID"
     sql: ${TABLE}.landing_event_id ;;
   }
 
   dimension: bounce_event_id {
-    label: "Bounce Event ID"
+    label: "バウンスイベントID"
     sql: ${TABLE}.bounce_event_id ;;
   }
 
   dimension_group: session_start {
-    label: "Session Start"
+    label: "セッション開始日時"
     type: time
 #     timeframes: [time, date, week, month, hour_of_day, day_of_week]
     sql: ${TABLE}.session_start ;;
   }
 
   dimension_group: session_end {
-    label: "Session End"
+    label: "セッション終了日時"
     type: time
     timeframes: [raw, time, date, week, month]
     sql: ${TABLE}.session_end ;;
   }
 
   dimension: duration {
-    label: "Duration (sec)"
+    label: "継続時間 (秒)"
     type: number
     sql: (UNIX_MICROS(${TABLE}.session_end) - UNIX_MICROS(${TABLE}.session_start))/1000000 ;;
   }
 
   measure: average_duration {
-    label: "Average Duration (sec)"
+    label: "継続滞在時間 (秒)"
     type: average
     value_format_name: decimal_2
     sql: ${duration} ;;
   }
 
   dimension: duration_seconds_tier {
-    label: "Duration Tier (sec)"
+    label: "継続時間ティア (秒)"
     type: tier
     tiers: [10, 30, 60, 120, 300]
     style: integer
@@ -92,13 +92,13 @@ view: sessions {
   #####  Bounce Information  ########
 
   dimension: is_bounce_session {
-    label: "Is Bounce Session"
+    label: "直帰セッションフラグ"
     type: yesno
     sql: ${number_of_events_in_session} = 1 ;;
   }
 
   measure: count_bounce_sessions {
-    label: "Count Bounce Sessions"
+    label: "セッション数（直帰セッション）"
     type: count
     filters: {
       field: is_bounce_session
@@ -108,7 +108,7 @@ view: sessions {
   }
 
   measure: percent_bounce_sessions {
-    label: "Count Bounce Sessions"
+    label: "直帰率"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${count_bounce_sessions} / nullif(${count},0) ;;
@@ -117,59 +117,59 @@ view: sessions {
   ####### Session by event types included  ########
 
   dimension: number_of_browse_events_in_session {
-    label: "Number of Browse Events in Session"
+    label: "セッション内ブラウズイベント数"
     type: number
     hidden: yes
     sql: ${TABLE}.browse_events ;;
   }
 
   dimension: number_of_product_events_in_session {
-    label: "Number of Product Events in Session"
+    label: "セッション内プロダクトイベント数"
     type: number
     hidden: yes
     sql: ${TABLE}.product_events ;;
   }
 
   dimension: number_of_cart_events_in_session {
-    label: "Number of Cart Events in Session"
+    label: "セッション内カートイベント数"
     type: number
     hidden: yes
     sql: ${TABLE}.cart_events ;;
   }
 
   dimension: number_of_purchase_events_in_session {
-    label: "Number of Purchase Events in Session"
+    label: "セッション内購買イベント数"
     type: number
     hidden: yes
     sql: ${TABLE}.purchase_events ;;
   }
 
   dimension: includes_browse {
-    label: "Includes Browse"
+    label: "フラグ：ブラウズを含むか"
     type: yesno
     sql: ${number_of_browse_events_in_session} > 0 ;;
   }
 
   dimension: includes_product {
-    label: "Includes Product"
+    label: "フラグ：プロダクトを含むか"
     type: yesno
     sql: ${number_of_product_events_in_session} > 0 ;;
   }
 
   dimension: includes_cart {
-    label: "Includes Cart"
+    label: "フラグ：カートを含むか"
     type: yesno
     sql: ${number_of_cart_events_in_session} > 0 ;;
   }
 
   dimension: includes_purchase {
-    label: "Includes Purchase"
+    label: "フラグ：購買を含むか"
     type: yesno
     sql: ${number_of_purchase_events_in_session} > 0 ;;
   }
 
   measure: count_with_cart {
-    label: "Count with Cart"
+    label: "セッション数（カート有）"
     type: count
     filters: {
       field: includes_cart
@@ -179,7 +179,7 @@ view: sessions {
   }
 
   measure: count_with_purchase {
-    label: "Count with Purchase"
+    label: "セッション数（購買有）"
     type: count
     filters: {
       field: includes_purchase
@@ -189,7 +189,7 @@ view: sessions {
   }
 
   dimension: number_of_events_in_session {
-    label: "Number of Events in Session"
+    label: "セッション内イベント数"
     type: number
     sql: ${TABLE}.number_of_events_in_session ;;
   }
@@ -197,7 +197,7 @@ view: sessions {
   ####### Linear Funnel   ########
 
   dimension: furthest_funnel_step {
-    label: "Furthest Funnel Step"
+    label: "最深到達ファネル"
     sql: CASE
       WHEN ${number_of_purchase_events_in_session} > 0 THEN '(5) Purchase'
       WHEN ${number_of_cart_events_in_session} > 0 THEN '(4) Add to Cart'
@@ -209,15 +209,15 @@ view: sessions {
   }
 
   measure: all_sessions {
-    view_label: "Funnel View"
-    label: "(1) All Sessions"
+    view_label: "ファネルビュー"
+    label: "(1) 全セッション"
     type: count
     drill_fields: [detail*]
   }
 
   measure: count_browse_or_later {
-    view_label: "Funnel View"
-    label: "(2) Browse or later"
+    view_label: "ファネルビュー"
+    label: "(2) ブラウズ、及びそれ以降"
     type: count
     filters: {
       field: furthest_funnel_step
@@ -227,8 +227,8 @@ view: sessions {
   }
 
   measure: count_product_or_later {
-    view_label: "Funnel View"
-    label: "(3) View Product or later"
+    view_label: "ファネルビュー"
+    label: "(3) プロダクト閲覧、及びそれ以降"
     type: count
     filters: {
       field: furthest_funnel_step
@@ -238,7 +238,7 @@ view: sessions {
   }
 
   measure: count_cart_or_later {
-    view_label: "Funnel View"
+    view_label: "ファネルビュー"
     label: "(4) Add to Cart or later"
     type: count
     filters: {
@@ -249,7 +249,7 @@ view: sessions {
   }
 
   measure: count_purchase {
-    view_label: "Funnel View"
+    view_label: "ファネルビュー"
     label: "(5) Purchase"
     type: count
     filters: {
@@ -261,14 +261,14 @@ view: sessions {
 
   measure: cart_to_checkout_conversion {
     label: "CVR（購買/カート）"
-    view_label: "Funnel View"
+    view_label: "ファネルビュー"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${count_purchase} / nullif(${count_cart_or_later},0) ;;
   }
 
   measure: overall_conversion {
-    view_label: "Funnel View"
+    view_label: "ファネルビュー"
     type: number
     value_format_name: percent_2
     sql: 1.0 * ${count_purchase} / nullif(${count},0) ;;
