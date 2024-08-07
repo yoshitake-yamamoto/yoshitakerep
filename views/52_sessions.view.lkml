@@ -239,7 +239,7 @@ view: sessions {
 
   measure: count_cart_or_later {
     view_label: "ファネルビュー"
-    label: "(4) Add to Cart or later"
+    label: "(4) カート追加、及びそれ以降"
     type: count
     filters: {
       field: furthest_funnel_step
@@ -250,7 +250,7 @@ view: sessions {
 
   measure: count_purchase {
     view_label: "ファネルビュー"
-    label: "(5) Purchase"
+    label: "(5) 購買"
     type: count
     filters: {
       field: furthest_funnel_step
@@ -268,6 +268,7 @@ view: sessions {
   }
 
   measure: overall_conversion {
+    label: "CVR（購買/セッション数）"
     view_label: "ファネルビュー"
     type: number
     value_format_name: percent_2

@@ -1,5 +1,5 @@
 - dashboard: web_analytics_overview
-  title: Web Analytics Overview
+  title: Webアナリティクスダッシュボード
   layout: newspaper
   preferred_viewer: dashboards-next
   query_timezone: user_timezone
@@ -35,8 +35,8 @@
     comparison_type: change
     comparison_reverse_colors: false
     show_comparison_label: true
-    comparison_label: Weekly Change
-    single_value_title: Visitors Past Week
+    comparison_label: 先週比
+    single_value_title: 週間UU数
     note_state: collapsed
     note_display: below
     note_text: ''
@@ -47,7 +47,7 @@
     col: 0
     width: 6
     height: 3
-  - title: Total Converted Visitors
+  - title: 購買ユーザー数
     name: Total Converted Visitors
     model: thelook_jp
     explore: order_items
@@ -64,7 +64,7 @@
     col: 11
     width: 5
     height: 3
-  - title: Total Profit
+  - title: 合計売上
     name: Total Profit
     model: thelook_jp
     explore: order_items
@@ -90,7 +90,7 @@
     col: 6
     width: 5
     height: 3
-  - title: Visits by Browser
+  - title: ブラウザ別WEBイベントシェア
     name: Visits by Browser
     model: thelook_jp
     explore: events
@@ -121,7 +121,7 @@
     col: 16
     width: 8
     height: 8
-  - title: How Long do Visitors Spend on Website?
+  - title: 滞在時間別セッション数
     name: How Long do Visitors Spend on Website?
     model: thelook_jp
     explore: events
@@ -140,7 +140,7 @@
     show_view_names: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
-    y_axis_labels: [Number of Sessions]
+    y_axis_labels: [セッション数]
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
     show_x_axis_label: false
@@ -177,7 +177,7 @@
     col: 16
     width: 8
     height: 10
-  - title: Bounce Rate by Page
+  - title: ページ別離脱率
     name: Bounce Rate by Page
     model: thelook_jp
     explore: sessions
@@ -212,7 +212,7 @@
     series_colors:
       sessions.count: "#1ea8df"
     series_labels:
-      events.bounce_rate: Bounce Rate by Page
+      events.bounce_rate: 離脱率
       events.count: Number of Page Views
     show_value_labels: false
     label_density: 10
@@ -234,7 +234,7 @@
     col: 0
     width: 12
     height: 7
-  - title: Most Popular Brands
+  - title: ブランド別アクセス状況
     name: Most Popular Brands
     model: thelook_jp
     explore: events
@@ -262,7 +262,7 @@
     x_axis_scale: auto
     y_axis_combined: true
     series_labels:
-      events.count: Total Pageviews
+      events.count: トータルPV数
     y_axis_labels: [Total Pageviews]
     x_axis_label: Brand Name
     label_density: 25
@@ -282,7 +282,7 @@
     col: 12
     width: 12
     height: 7
-  - title: eCommerce Funnel
+  - title: Eコマースファネル
     name: eCommerce Funnel
     model: thelook_jp
     explore: sessions
@@ -349,7 +349,7 @@
     col: 0
     width: 11
     height: 7
-  - title: Global Events
+  - title: 地域別イベント数
     name: Global Events
     model: thelook_jp
     explore: events
@@ -407,7 +407,7 @@
     col: 0
     width: 16
     height: 8
-  - title: Daily Session and User Count
+  - title: 日別セッション数・ユーザー数
     name: Daily Session and User Count
     model: thelook_jp
     explore: sessions
@@ -457,7 +457,7 @@
     col: 0
     width: 24
     height: 9
-  - title: Percent Purchasing Sessions
+  - title: 購買セッション比率
     name: Percent Purchasing Sessions
     model: thelook_jp
     explore: sessions
@@ -498,12 +498,12 @@
       users.count: column
     inner_radius: 50
     series_labels:
-      'No': No Purchase
-      'Yes': Results in Purchase
+      'No': 購買なし
+      'Yes': 購買あり
     series_colors: {}
     note_state: collapsed
     note_display: below
-    note_text: Percent of unique visits that result in a purchase
+    note_text: 各セッションにおいて購買が発生した割合
     listen:
       Browser: events.browser
       Traffic Source: users.traffic_source
