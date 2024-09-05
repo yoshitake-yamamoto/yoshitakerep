@@ -1,6 +1,9 @@
 view: users {
   sql_table_name: looker-private-demo.ecomm.users ;;
   view_label: "顧客マスタ"
+
+
+
   ## Demographics ##
 
   dimension: id {

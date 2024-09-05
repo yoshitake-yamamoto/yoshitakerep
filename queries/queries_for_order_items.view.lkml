@@ -3,7 +3,8 @@ include: "/views/**/*.view" # include all the views
 # Place in `thelook` model
 explore: +order_items {
   query: high_value_geos {
-    description: "States delivering high gross margins over the past 90 days"
+    label: "地域分析"
+    description: "過去90日間に高い粗利率を記録した州"
     dimensions: [users.state]
     measures: [total_gross_margin]
     sorts: [total_gross_margin: desc]
@@ -18,7 +19,8 @@ explore: +order_items {
 
 explore: +order_items {
   query: year_over_year {
-    description: "Suitable for line chart comparing monthly sales over the last four years"
+    label: "売上の年度比較"
+    description: "直近4年間の月次売上比較（折れ線グラフ用）"
     dimensions: [created_month_num, created_year]
     pivots: [created_year]
     measures: [total_sale_price]
@@ -32,7 +34,8 @@ explore: +order_items {
 
 explore: +order_items {
   query: shipments_status {
-    description: "Summarises the status of the shipping pipeline"
+    label: "配送ステータス"
+    description: "配送パイプラインの要約"
     dimensions: [created_date, status]
     pivots: [status]
     measures: [order_count]
@@ -46,7 +49,8 @@ explore: +order_items {
 
 explore: +order_items {
   query: inventory_aging {
-    description: "Volume of inventory by age of stock item"
+    label: "在庫期間と在庫量"
+    description: "在庫期間別の在庫量"
     dimensions: [inventory_items.days_in_inventory_tier]
     measures: [inventory_items.count]
     filters: [distribution_centers.name: "Chicago IL"]
@@ -57,7 +61,8 @@ explore: +order_items {
 # Place in `thelook` model
 explore: +order_items {
   query: severely_delayed_orders {
-    description: "Orders that are still in Processing after 3 days, filtered by Distribution Center"
+    label: "遅延している処理"
+    description: "処理中のまま3日以上経過した注文（配送センターでフィルター可）"
     dimensions: [created_date, order_id, products.item_name, status, users.email]
     measures: [average_days_to_process]
     filters: [

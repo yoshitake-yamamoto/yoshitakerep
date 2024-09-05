@@ -1,6 +1,8 @@
 view: order_items {
   sql_table_name: looker-private-demo.ecomm.order_items ;;
   view_label: "受注明細"
+
+
   ########## IDs, Foreign Keys, Counts ###########
 
   dimension: id {
@@ -505,6 +507,14 @@ view: order_items {
     drill_fields: [products.brand, order_count, count_with_repeat_purchase_within_30d]
   }
 
+
+
+    measure: last_order_date{
+      label: "最終受注日"
+      type: date
+      sql: max(${created_date}) ;;
+      convert_tz: no
+    }
 
 ########## Dynamic Sales Cohort App ##########
 
