@@ -38,6 +38,7 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+
   dimension: over_21 {
     label: "22歳以上フラグ"
     type: yesno
@@ -303,6 +304,7 @@ view: users {
     sql: ${age} ;;
     drill_fields: [detail*]
   }
+
 
   set: detail {
     fields: [id, name, email, age, created_date, orders.count, order_items.count]

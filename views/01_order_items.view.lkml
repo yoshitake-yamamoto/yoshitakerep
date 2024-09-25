@@ -278,6 +278,7 @@ view: order_items {
       ;;
   }
 
+
   dimension: days_since_sold {
     label: "受注後経過日数"
     hidden: yes
