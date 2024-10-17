@@ -260,6 +260,12 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
+  ########## 年月フィルタ ##########
+
+  # 年月書式でフィルタするためのディメンション
+
+
+
   #---------------------------------------------------------------------------
 
 
@@ -510,12 +516,63 @@ view: order_items {
 
 
 
-    measure: last_order_date{
-      label: "最終受注日"
-      type: date
-      sql: max(${created_date}) ;;
-      convert_tz: no
-    }
+  measure: last_order_date{
+    label: "最終受注日"
+    type: date
+    sql: max(${created_date}) ;;
+    convert_tz: no
+  }
+
+
+  ########## 期間比較分析 ##########
+
+
+  # 期間１と期間２をパラメータで設定、フィルタ式を使ったメジャーを作る
+
+  filter: duration1{
+    label: "集計対象期間1"
+    type: date
+    hidden: yes
+  }
+
+  filter: duration2{
+    label: "集計対象期間2"
+    type: date
+    hidden: yes
+  }
+
+
+  measure: total_sales_duration1{
+    label: "合計売上（期間１）"
+    type: sum
+    sql: CASE
+        WHEN {% condition duration1 %} TIMESTAMP(${created_date}) {% endcondition %}
+        THEN ${sale_price}
+        ELSE 0
+        END ;;
+    value_format_name: usd
+    hidden: yes
+  }
+
+  measure: total_sales_duration2{
+    label: "合計売上（期間２）"
+    type: sum
+    sql: CASE
+      WHEN {% condition duration2 %} TIMESTAMP(${created_date}) {% endcondition %}
+      THEN ${sale_price}
+      ELSE 0
+      END ;;
+    value_format_name: usd
+    hidden: yes
+  }
+
+
+
+
+
+
+
+
 
 ########## Dynamic Sales Cohort App ##########
 

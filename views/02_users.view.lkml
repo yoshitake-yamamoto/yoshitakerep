@@ -306,6 +306,8 @@ view: users {
   }
 
 
+
+
   set: detail {
     fields: [id, name, email, age, created_date, orders.count, order_items.count]
   }

@@ -25,6 +25,8 @@ explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
 
+  #test
+
   join: order_facts {
     type: left_outer
     relationship: many_to_one
