@@ -13,6 +13,18 @@ view: order_items {
     value_format: "00000"
   }
 
+
+  dimension: status_eng {
+    type: string
+    sql:
+      CASE
+        WHEN ${status} = "1" THEN "Smart"
+        WHEN ${status} = "2" THEN "Business"
+        ELSE "other"
+      END
+    ;;
+  }
+
   dimension: inventory_item_id {
     label: "在庫ID"
     type: number
@@ -188,6 +200,7 @@ view: order_items {
 
   }
 
+
   # 受注日の日本語化 --------------------------------------------------------
   dimension: created_year{
     group_label: "受注日"
@@ -260,10 +273,6 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-  ########## 年月フィルタ ##########
-
-  # 年月書式でフィルタするためのディメンション
-
 
 
   #---------------------------------------------------------------------------
@@ -295,10 +304,11 @@ view: order_items {
     label: "会員登録後経過月数"
     view_label: "受注履歴"
     type: number
-    sql: CAST(FLOOR(TIMESTAMP_DIFF(${created_raw}, ${users.created_raw}, DAY)/30) AS INT64) ;;
+    # sql: CAST(FLOOR(TIMESTAMP_DIFF(${created_raw}, ${users.created_raw}, DAY)/30) AS INT64)
+    sql: DATE_DIFF(CAST(${created_raw} AS DATE), CAST(${users.created_raw} AS DATE), MONTH) ;;
   }
 
-########## Logistics ##########
+  ########## Logistics ##########
 
   dimension: status {
     label: "ステータス"
@@ -339,13 +349,14 @@ view: order_items {
     sql: ${shipping_time} ;;
   }
 
-########## Financial Information ##########
+
+  ########## Financial Information ##########
 
   dimension: sale_price {
     label: "売上"
     type: number
     value_format_name: usd
-    sql: ${TABLE}.sale_price;;
+    sql: ${TABLE}.sale_price * 1.08;;
   }
 
   dimension: gross_margin {
@@ -377,6 +388,7 @@ view: order_items {
     value_format_name: usd
     sql: ${sale_price};;
     drill_fields: [detail*]
+
 
   }
 
@@ -565,8 +577,6 @@ view: order_items {
     value_format_name: usd
     hidden: yes
   }
-
-
 
 
 
