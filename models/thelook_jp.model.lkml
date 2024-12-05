@@ -7,6 +7,13 @@ include: "/dashboards/*.dashboard.lookml" # include all the views
 
 ############ Model Configuration ##############
 
+
+access_grant: thelook_model {
+  allowed_values: ["Yes"]
+  user_attribute: view_thelook
+}
+
+
 # datagroup: ecommerce_etl {
 #   sql_trigger: SELECT max(created_at) FROM ecomm.events ;;
 #   max_cache_age: "24 hours"
