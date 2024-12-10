@@ -205,6 +205,7 @@ view: order_items {
   dimension: created_year{
     group_label: "受注日"
     group_item_label: "年(YYYY)"
+    label: "年(YYYY)"
     type: date_year
     sql: ${TABLE}.created_at ;;
   }
@@ -212,6 +213,7 @@ view: order_items {
   dimension: created_month{
     group_label: "受注日"
     group_item_label: "年月(YYYY-MM)"
+    label: "年月(YYYY-MM)"
     type: date_month
     sql: ${TABLE}.created_at ;;
   }
@@ -219,6 +221,7 @@ view: order_items {
   dimension: created_month_num{
     group_label: "受注日"
     group_item_label: "月(MM)"
+    label: "月(MM)"
     type: date_month_num
     sql: ${TABLE}.created_at ;;
   }
@@ -226,6 +229,7 @@ view: order_items {
   dimension: created_date{
     group_label: "受注日"
     group_item_label: "年月日(YYYY-MM-DD)"
+    label: "年月日(YYYY-MM-DD)"
     type: date
     sql: ${TABLE}.created_at ;;
   }
@@ -233,6 +237,7 @@ view: order_items {
   dimension: created_day_of_week{
     group_label: "受注日"
     group_item_label: "曜日"
+    label: "曜日"
     type: date_day_of_week
     sql: ${TABLE}.created_at ;;
   }
@@ -240,6 +245,7 @@ view: order_items {
   dimension: created_hour{
     group_label: "受注日"
     group_item_label: "時間(HH)"
+    label: "時間(HH)"
     type: date_hour_of_day
     sql: ${TABLE}.created_at ;;
   }
@@ -247,6 +253,7 @@ view: order_items {
   dimension: created_time{
     group_label: "受注日"
     group_item_label: "日時"
+    label: "日時"
     type: date_time
     sql: ${TABLE}.created_at ;;
   }
@@ -254,6 +261,7 @@ view: order_items {
   dimension: created_raw{
     hidden: yes
     group_label: "受注日"
+    label: "受注日"
     type: date_raw
     sql: ${TABLE}.created_at ;;
   }
@@ -262,6 +270,7 @@ view: order_items {
   dimension: created_week{
     group_label: "受注日"
     group_item_label: "週"
+    label: "週"
     type: date_week
     sql: ${TABLE}.created_at ;;
   }
@@ -269,6 +278,7 @@ view: order_items {
   dimension: created_week_of_year{
     group_label: "受注日"
     group_item_label: "週番号"
+    label: "週番号"
     type: date_week_of_year
     sql: ${TABLE}.created_at ;;
   }
