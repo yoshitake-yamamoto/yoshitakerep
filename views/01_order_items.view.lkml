@@ -8,6 +8,7 @@ view: order_items {
   dimension: id {
     label: "明細ID"
     primary_key: yes
+    description: "明細一行一行をユニークに特定するためのID"
     type: number
     sql: ${TABLE}.id ;;
     value_format: "00000"

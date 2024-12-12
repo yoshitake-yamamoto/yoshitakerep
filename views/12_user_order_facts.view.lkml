@@ -9,7 +9,6 @@ view: user_order_facts {
         , CAST(MIN(created_at)  AS TIMESTAMP) AS first_order
         , CAST(MAX(created_at)  AS TIMESTAMP)  AS latest_order
         , COUNT(DISTINCT FORMAT_TIMESTAMP('%Y%m', created_at))  AS number_of_distinct_months_with_orders
-        --, FIRST_VALUE(CONCAT(uniform(2, 9, random(1)),uniform(0, 9, random(2)),uniform(0, 9, random(3)),'-',uniform(0, 9, random(4)),uniform(0, 9, random(5)),uniform(0, 9, random(6)),'-',uniform(0, 9, random(7)),uniform(0, 9, random(8)),uniform(0, 9, random(9)),uniform(0, 9, random(10)))) OVER (PARTITION BY user_id ORDER BY user_id) AS phone_number
       FROM looker-private-demo.ecomm.order_items
       GROUP BY user_id
     ;;
@@ -120,5 +119,22 @@ view: user_order_facts {
     type: average
     value_format_name: usd
     sql: ${lifetime_revenue} ;;
+  }
+
+  measure: count_F2 {
+    label: "F2転換顧客数"
+    type: count
+    filters: [repeat_customer: "yes"]
+  }
+
+  measure: count_users {
+    label: "受注顧客数"
+    type: count
+  }
+
+  measure: F2_rate {
+    label: "F2転換率"
+    sql: 1.0 * ${count_F2} / NULLIF(${count_users},0) ;;
+    value_format_name: percent_1
   }
 }
