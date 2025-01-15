@@ -2,6 +2,7 @@ connection: "looker-private-demo"
 label: "eCommerce_JP"
 include: "/queries/queries*.view" # includes all queries refinements
 include: "/views/**/*.view" # include all the views
+include: "/test_view/**/*.view" # include all the views
 include: "/gen_ai/**/*.view" # include all the views
 include: "/dashboards/*.dashboard.lookml" # include all the views
 
@@ -386,6 +387,20 @@ explore: ecomm_predict {
   }
 }
 
+
+explore: basket_detail{
+  join: page_view {
+    type: inner
+    relationship: many_to_many
+    sql_on:
+      ${basket_detail.user_id} = ${page_view.user_id}
+      AND ${basket_detail.created_raw} > ${page_view.created_raw}
+      AND ${basket_detail.created_raw} <= CAST(${page_view.date_upper} AS TIMESTAMP)
+      -- 商品カテゴリの一致などの条件をつけるならここ
+      ;;
+  }
+
+}
 
 # explore: order_items_BQML {
 #   label: "(9) for BQML cluster"

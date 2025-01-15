@@ -305,6 +305,11 @@ view: users {
     drill_fields: [detail*]
   }
 
+  measure: fifty_pct {
+    sql: 0.5 ;;
+    value_format_name: percent_0
+  }
+
 
   set: detail {
     fields: [id, name, email, age, created_date, orders.count, order_items.count]
