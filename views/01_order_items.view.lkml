@@ -13,7 +13,9 @@ view: order_items {
     sql: ${TABLE}.id ;;
     value_format: "00000"
   }
-
+  dimension: test {
+    sql: 12 ;;
+  }
 
   dimension: status_eng {
     type: string
