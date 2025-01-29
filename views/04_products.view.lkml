@@ -16,6 +16,7 @@ view: products {
     drill_fields: [department, brand, item_name]
   }
 
+
   dimension: item_name {
     label: "商品名"
     sql: TRIM(${TABLE}.name) ;;
