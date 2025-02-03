@@ -33,6 +33,10 @@ explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
 
+  access_filter: {
+    field: products.brand
+    user_attribute: brand
+  }
   #test
 
   join: order_facts {

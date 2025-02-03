@@ -13,20 +13,7 @@ view: order_items {
     sql: ${TABLE}.id ;;
     value_format: "00000"
   }
-  dimension: test {
-    sql: 12 ;;
-  }
 
-  dimension: status_eng {
-    type: string
-    sql:
-      CASE
-        WHEN ${status} = "1" THEN "Smart"
-        WHEN ${status} = "2" THEN "Business"
-        ELSE "other"
-      END
-    ;;
-  }
 
   dimension: inventory_item_id {
     label: "在庫ID"
@@ -212,6 +199,16 @@ view: order_items {
     type: date_year
     sql: ${TABLE}.created_at ;;
   }
+
+  dimension: created_quarter{
+    group_label: "受注日"
+    group_item_label: "四半期"
+    label: "四半期"
+    type: date_quarter
+    sql: ${TABLE}.created_at ;;
+  }
+
+
 
   dimension: created_month{
     group_label: "受注日"
