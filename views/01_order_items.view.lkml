@@ -200,13 +200,13 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: created_quarter{
-    group_label: "受注日"
-    group_item_label: "四半期"
-    label: "四半期"
-    type: date_quarter
-    sql: ${TABLE}.created_at ;;
-  }
+  # dimension: created_quarter{
+  #   group_label: "受注日"
+  #   group_item_label: "四半期"
+  #   label: "四半期"
+  #   type: date_quarter
+  #   sql: ${TABLE}.created_at ;;
+  # }
 
 
 
