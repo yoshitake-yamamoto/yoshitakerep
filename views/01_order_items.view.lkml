@@ -366,7 +366,7 @@ view: order_items {
     label: "売上"
     type: number
     value_format_name: usd
-    sql: ${TABLE}.sale_price * 1.08;;
+    sql: ${TABLE}.sale_price * 1.10;;
   }
 
   dimension: gross_margin {
