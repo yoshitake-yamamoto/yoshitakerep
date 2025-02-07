@@ -322,6 +322,7 @@ view: order_items {
 
   dimension: status {
     label: "ステータス"
+    description: "配送状況を示す"
     sql: ${TABLE}.status ;;
   }
 
@@ -397,7 +398,8 @@ view: order_items {
     type: sum
     value_format_name: usd
     sql: ${sale_price};;
-    drill_fields: [detail*]
+    # drill_fields: [detail*]
+    drill_fields: [user_id, sale_price]
 
 
   }
