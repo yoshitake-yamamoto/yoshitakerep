@@ -37,7 +37,6 @@ explore: order_items {
   #   field: products.brand
   #   user_attribute: brand
   # }
-  #test
 
   join: order_facts {
     type: left_outer
