@@ -4,6 +4,7 @@ view: users {
 
   ## Demographics ##
 
+
   dimension: id {
     label: "顧客ID"
     primary_key: yes
@@ -44,7 +45,7 @@ view: users {
   }
 
   dimension: age_tier {
-    label: "年代"
+    label: "顧客ランク"
     type: tier
     tiers: [0, 10, 20, 30, 40, 50, 60, 70]
     style: integer

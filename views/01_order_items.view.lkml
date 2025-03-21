@@ -593,15 +593,6 @@ view: order_items {
   }
 
 
-    dimension: shipping_days  {
-      description: "発送から到着までに掛かった日数"
-      label: "発送日数"
-      type: number
-      sql:  DATE_DIFF(${delivered_date}, ${shipped_date}, DAY) ;;
-    }
-
-
-
 
 ########## Dynamic Sales Cohort App ##########
 
