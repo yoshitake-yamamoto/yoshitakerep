@@ -45,7 +45,7 @@ view: users {
   }
 
   dimension: age_tier {
-    label: "顧客ランク"
+    label: "年代"
     type: tier
     tiers: [0, 10, 20, 30, 40, 50, 60, 70]
     style: integer
