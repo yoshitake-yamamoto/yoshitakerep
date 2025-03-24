@@ -13,6 +13,7 @@ view: users {
     tags: ["user_id"]
   }
 
+
   dimension: first_name {
     label: "名"
     hidden: yes
@@ -28,7 +29,7 @@ view: users {
 
   dimension: name {
     label: "氏名"
-    sql: concat(${first_name}, ' ', ${last_name}) ;;
+    sql: ${first_name} || "-" || ${last_name} ;;
   }
 
   dimension: age {
@@ -46,6 +47,7 @@ view: users {
 
   dimension: age_tier {
     label: "年代"
+    description: "user rank"
     type: tier
     tiers: [0, 10, 20, 30, 40, 50, 60, 70]
     style: integer
