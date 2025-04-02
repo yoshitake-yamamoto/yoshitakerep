@@ -651,6 +651,7 @@ view: order_items {
 
 ########## Sets ##########
 
+
   set: detail {
     fields: [order_id, status, created_date, sale_price, products.brand, products.item_name, users.portrait, users.name, users.email]
   }
