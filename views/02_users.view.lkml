@@ -17,7 +17,15 @@ view: users {
   dimension: first_name {
     label: "名"
     hidden: yes
-    sql: CONCAT(UPPER(SUBSTR(${TABLE}.first_name,1,1)), LOWER(SUBSTR(${TABLE}.first_name,2))) ;;
+    # sql: CONCAT(UPPER(SUBSTR(${TABLE}.first_name,1,1)), LOWER(SUBSTR(${TABLE}.first_name));;
+
+    sql:
+    {% if _user_attributes['can_see_sensitive_data'] == 'No' %}
+    'XX'
+    {% else %}
+    ${TABLE}.first_name
+    {% endif %}
+    ;;
 
   }
 
@@ -29,7 +37,7 @@ view: users {
 
   dimension: name {
     label: "氏名"
-    sql: ${first_name} || "-" || ${last_name} ;;
+    sql: ${first_name} || " " || ${last_name} ;;
   }
 
   dimension: age {

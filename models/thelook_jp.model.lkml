@@ -29,6 +29,8 @@ persist_with: ecommerce_etl_modified
 ############ Base Explores #############
 
 
+explore: share_analysis {}
+
 explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
@@ -37,6 +39,7 @@ explore: order_items {
   #   field: products.brand
   #   user_attribute: brand
   # }
+
 
   join: order_facts {
     type: left_outer

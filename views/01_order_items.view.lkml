@@ -4,7 +4,6 @@ view: order_items {
 
 
 
-
   ########## IDs, Foreign Keys, Counts ###########
 
   dimension: id {
@@ -369,7 +368,7 @@ view: order_items {
     label: "売上"
     type: number
     value_format_name: usd
-    sql: ${TABLE}.sale_price * 1.10;;
+    sql: ${TABLE}.sale_price;;
   }
 
   dimension: gross_margin {
