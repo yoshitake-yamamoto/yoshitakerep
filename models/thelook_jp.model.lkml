@@ -26,8 +26,13 @@ datagroup: ecommerce_etl_modified {
 }
 
 persist_with: ecommerce_etl_modified
-############ Base Explores #############
 
+
+# 週の開始日（月曜日はじまり）
+week_start_day: monday
+
+
+############ Base Explores #############
 
 explore: share_analysis {}
 
@@ -35,10 +40,14 @@ explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
 
-  # access_filter: {
-  #   field: products.brand
-  #   user_attribute: brand
-  # }
+  # 行レベルのアクセス権限管理
+  access_filter: {
+    field: users.country
+    user_attribute: country
+
+    # field: products.brand
+    # user_attribute: brand
+  }
 
 
   join: order_facts {
