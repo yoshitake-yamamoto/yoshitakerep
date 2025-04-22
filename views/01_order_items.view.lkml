@@ -30,6 +30,7 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+
   measure: count {
     label: "明細行数"
     type: count
@@ -368,7 +369,8 @@ view: order_items {
     label: "売上"
     type: number
     value_format_name: usd
-    sql: ${TABLE}.sale_price;;
+    description: "すべて消費税を含む"
+    sql: 1.10 * ${TABLE}.sale_price;;
   }
 
   dimension: gross_margin {
