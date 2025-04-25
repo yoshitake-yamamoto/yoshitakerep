@@ -121,7 +121,6 @@ explore: order_items {
 
 
 
-
 #########  Event Data Explores #########
 
 explore: events {
