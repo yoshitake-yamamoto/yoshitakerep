@@ -3,7 +3,6 @@ view: order_items {
   view_label: "受注明細"
 
 
-
   ########## IDs, Foreign Keys, Counts ###########
 
   dimension: id {
@@ -179,8 +178,9 @@ view: order_items {
   dimension_group: shipped {
     label: "発送日"
     type: time
-    timeframes: [date, week, month, raw]
+    timeframes: [date, week, month, raw, time]
     sql: CAST(${TABLE}.shipped_at AS TIMESTAMP) ;;
+
 
   }
 
@@ -402,7 +402,7 @@ view: order_items {
     value_format_name: usd
     sql: ${sale_price};;
     # drill_fields: [detail*]
-    drill_fields: [user_id, sale_price]
+    drill_fields: [created_month, total_sale_price]
 
 
   }

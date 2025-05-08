@@ -42,13 +42,17 @@ explore: order_items {
   view_name: order_items
 
   # 行レベルのアクセス権限管理
-  access_filter: {
-    field: users.country
-    user_attribute: country
+  # access_filter: {
+  #   field: products.brand
+  #   user_attribute: brand
+  # }
 
-    # field: products.brand
-    # user_attribute: brand
-  }
+  # 行レベルのアクセス権限管理（国）
+  # access_filter: {
+  #   field: users.country
+  #   user_attribute: country
+  # }
+
 
 
   join: order_facts {
