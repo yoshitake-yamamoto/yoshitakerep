@@ -206,7 +206,7 @@ view: users {
   }
 
   dimension: country {
-    label: "犬種"
+    label: "国"
     map_layer_name: countries
     drill_fields: [state, city]
     sql: CASE WHEN ${TABLE}.country = 'UK' THEN 'United Kingdom'
