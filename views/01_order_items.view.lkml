@@ -30,10 +30,12 @@ view: order_items {
   }
 
 
+
   measure: count {
     label: "明細行数"
     type: count
     drill_fields: [detail*]
+
   }
 
   measure: count_last_28d {

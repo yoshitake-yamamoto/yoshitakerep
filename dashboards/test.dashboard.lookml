@@ -1,6 +1,6 @@
 ---
 - dashboard: ec
-  title: EC基本ダッシュボード
+  title: テステステステスEC基本ダッシュボード
   layout: newspaper
   preferred_viewer: dashboards
   description: ''
@@ -62,7 +62,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 2
+    row: 3
     col: 0
     width: 4
     height: 4
@@ -141,7 +141,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 2
+    row: 3
     col: 4
     width: 4
     height: 4
@@ -226,7 +226,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 6
+    row: 7
     col: 0
     width: 16
     height: 6
@@ -306,7 +306,7 @@
       User Gender: users.gender
       Date: events.event_date
       Country: users.country
-    row: 26
+    row: 27
     col: 0
     width: 10
     height: 7
@@ -395,7 +395,7 @@
       User Gender: users.gender
       Location: distribution_centers.location
       Country: users.country
-    row: 33
+    row: 34
     col: 10
     width: 14
     height: 7
@@ -470,7 +470,7 @@
       User Gender: users.gender
       Location: distribution_centers.location
       Country: users.country
-    row: 2
+    row: 3
     col: 16
     width: 8
     height: 10
@@ -557,7 +557,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 14
+    row: 15
     col: 10
     width: 14
     height: 9
@@ -632,7 +632,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 33
+    row: 34
     col: 0
     width: 10
     height: 7
@@ -689,7 +689,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 14
+    row: 15
     col: 0
     width: 10
     height: 9
@@ -747,7 +747,7 @@
       Date: order_items.created_date
       Location: distribution_centers.location
       Country: users.country
-    row: 2
+    row: 3
     col: 8
     width: 4
     height: 4
@@ -845,7 +845,7 @@
       User Gender: users.gender
       Location: distribution_centers.location
       Country: users.country
-    row: 2
+    row: 3
     col: 12
     width: 4
     height: 4
@@ -854,7 +854,7 @@
     title_text: "<span class='fa fa-users'> </span>顧客統計"
     subtitle_text: 顧客を理解する
     body_text: ''
-    row: 12
+    row: 13
     col: 0
     width: 24
     height: 2
@@ -934,7 +934,7 @@
       City: users.city
       Traffic Source: users.traffic_source
       Country: users.country
-    row: 26
+    row: 27
     col: 10
     width: 14
     height: 7
@@ -944,7 +944,7 @@
     subtitle_text: Web上での顧客行動を理解する
     body_text: "<div style='text-align: center;'> <b>推奨アクション</b> ：成功しているブランドについて、\
       \ ブランド個別ダッシュボードに移行して深堀分析をおこなう</div>"
-    row: 23
+    row: 24
     col: 0
     width: 24
     height: 3
@@ -953,10 +953,18 @@
     title_text: "<span class='fa fa-tachometer'>売上関連指標</span>"
     subtitle_text: ビジネスの概況を理解する
     body_text: ''
-    row: 0
+    row: 1
     col: 0
     width: 24
     height: 2
+  - type: button
+    name: button_166
+    rich_content_json:
+     '{"text":"New Button","description":"","newTab":true,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"https://64adda36-65fb-43c7-be36-4a7c86c1c6f9.looker.app/dashboards/jHfEAGKR6knVw876d8RbNi?State=&City=&Traffic+Source=&User+Gender=&Date=90+days&Location=&Country={{ _filters[''users.country''] | url_encode}}"}'
+    row: 0
+    col: 0
+    width: 24
+    height: 1
   filters:
   - name: State
     title: 州
