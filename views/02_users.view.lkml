@@ -15,7 +15,7 @@ view: users {
 
 
   dimension: first_name {
-    label: "名"
+    label: "名前"
     hidden: no
     # sql: CONCAT(UPPER(SUBSTR(${TABLE}.first_name,1,1)), LOWER(SUBSTR(${TABLE}.first_name));;
 
@@ -52,6 +52,7 @@ view: users {
     type: yesno
     sql:  ${age} > 21;;
   }
+
 
   dimension: age_tier {
     label: "年代"
@@ -227,6 +228,7 @@ view: users {
     label: "経度"
     type: number
     sql: round(${TABLE}.latitude,1) ;;
+
   }
 
   dimension: approx_longitude {

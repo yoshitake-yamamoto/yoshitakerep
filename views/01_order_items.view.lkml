@@ -5,6 +5,7 @@ view: order_items {
 
   ########## IDs, Foreign Keys, Counts ###########
 
+
   dimension: id {
     label: "明細ID"
     primary_key: yes
@@ -53,6 +54,7 @@ view: order_items {
     label: "受注件数"
     type: count_distinct
     drill_fields: [detail*]
+    #drill_fields: [id, order_count]
     sql: ${order_id};;
   }
 
