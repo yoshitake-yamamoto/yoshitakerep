@@ -28,7 +28,7 @@
       users.created_date: 7 days
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: goal, label: 目標, expression: '10000', value_format: !!null '',
+    dynamic_fields: [{table_calculation: goal, label: 目標, expression: '10000',
         value_format_name: decimal_0, _kind_hint: dimension, _type_hint: number}]
     query_timezone: America/Los_Angeles
     custom_color_enabled: false
