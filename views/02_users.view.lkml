@@ -15,7 +15,7 @@ view: users {
 
 
   dimension: first_name {
-    label: "名前"
+    label: "名"
     hidden: no
     # sql: CONCAT(UPPER(SUBSTR(${TABLE}.first_name,1,1)), LOWER(SUBSTR(${TABLE}.first_name));;
 

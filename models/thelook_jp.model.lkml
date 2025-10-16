@@ -37,6 +37,7 @@ week_start_day: monday
 
 explore: share_analysis {}
 
+
 explore: order_items {
   label: "(1) 受注・商品・顧客"
   view_name: order_items
