@@ -214,6 +214,23 @@ view: order_items {
   #   sql: ${TABLE}.created_at ;;
   # }
 
+  dimension: created_fiscal_year{
+    group_label: "受注日"
+    group_item_label: "年度(YYYY)"
+    label: "年度(YYYY)"
+    type: date_fiscal_year
+    sql: ${TABLE}.created_at ;;
+  }
+
+    # dimension: created_fiscal_month{
+    #   group_label: "受注日"
+    #   group_item_label: "年度月(MM)"
+    #   label: "年度月(MM)"
+    #   type: date_fiscal_month_num
+    #   sql: ${TABLE}.created_at ;;
+    # }
+
+
 
 
   dimension: created_month{

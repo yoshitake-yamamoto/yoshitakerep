@@ -32,6 +32,8 @@ persist_with: ecommerce_etl_modified
 # 週の開始日（月曜日はじまり）
 week_start_day: monday
 
+fiscal_month_offset: 3
+
 
 ############ Base Explores #############
 
