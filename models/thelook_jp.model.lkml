@@ -9,10 +9,10 @@ include: "/dashboards/*.dashboard.lookml" # include all the views
 ############ Model Configuration ##############
 
 
-access_grant: thelook_model {
-  allowed_values: ["Yes"]
-  user_attribute: view_thelook
-}
+# access_grant: thelook_model {
+#   allowed_values: ["Yes"]
+#   user_attribute: view_thelook
+# }
 
 
 
