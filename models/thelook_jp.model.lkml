@@ -9,10 +9,10 @@ include: "/dashboards/*.dashboard.lookml" # include all the views
 ############ Model Configuration ##############
 
 
-access_grant: thelook_model {
-  allowed_values: ["Yes"]
-  user_attribute: view_thelook
-}
+# access_grant: thelook_model {
+#   allowed_values: ["Yes"]
+#   user_attribute: view_thelook
+# }
 
 
 
@@ -32,10 +32,13 @@ persist_with: ecommerce_etl_modified
 # 週の開始日（月曜日はじまり）
 week_start_day: monday
 
+fiscal_month_offset: 3
+
 
 ############ Base Explores #############
 
 explore: share_analysis {}
+
 
 explore: order_items {
   label: "(1) 受注・商品・顧客"

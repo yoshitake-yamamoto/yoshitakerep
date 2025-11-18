@@ -53,6 +53,7 @@ view: users {
     sql:  ${age} > 21;;
   }
 
+
   dimension: age_tier {
     label: "年代"
     type: tier
@@ -227,6 +228,7 @@ view: users {
     label: "経度"
     type: number
     sql: round(${TABLE}.latitude,1) ;;
+
   }
 
   dimension: approx_longitude {

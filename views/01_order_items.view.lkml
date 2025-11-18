@@ -5,6 +5,7 @@ view: order_items {
 
   ########## IDs, Foreign Keys, Counts ###########
 
+
   dimension: id {
     label: "明細ID"
     primary_key: yes
@@ -53,6 +54,7 @@ view: order_items {
     label: "受注件数"
     type: count_distinct
     drill_fields: [detail*]
+    #drill_fields: [id, order_count]
     sql: ${order_id};;
   }
 
@@ -211,6 +213,23 @@ view: order_items {
   #   type: date_quarter
   #   sql: ${TABLE}.created_at ;;
   # }
+
+  dimension: created_fiscal_year{
+    group_label: "受注日"
+    group_item_label: "年度(YYYY)"
+    label: "年度(YYYY)"
+    type: date_fiscal_year
+    sql: ${TABLE}.created_at ;;
+  }
+
+    # dimension: created_fiscal_month{
+    #   group_label: "受注日"
+    #   group_item_label: "年度月(MM)"
+    #   label: "年度月(MM)"
+    #   type: date_fiscal_month_num
+    #   sql: ${TABLE}.created_at ;;
+    # }
+
 
 
 
