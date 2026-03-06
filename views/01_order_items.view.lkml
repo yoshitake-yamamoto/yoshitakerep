@@ -343,12 +343,41 @@ view: order_items {
 
   ########## Logistics ##########
 
-  dimension: status {
+  dimension: status_en {
+    hidden: yes
     label: "ステータス"
     description: "配送状況を示す"
     sql: ${TABLE}.status ;;
     hidden: yes
   }
+
+  dimension: status {
+    label: "ステータス"
+    case: {
+      when: {
+        sql: ${status_en} = "Cancelled" ;;
+        label: "キャンセル"
+      }
+      when: {
+        sql: ${status_en} = "Complete" ;;
+        label: "完了"
+      }
+      when: {
+        sql: ${status_en} = "Processing" ;;
+        label: "処理中"
+      }
+      when: {
+        sql: ${status_en} = "Returned" ;;
+        label: "返品済"
+      }
+      when: {
+        sql: ${status_en} = "Shipped" ;;
+        label: "配送済"
+      }
+      else: "不明"
+    }
+  }
+
 
 
   dimension: days_to_process {
