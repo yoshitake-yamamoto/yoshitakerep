@@ -46,8 +46,8 @@ explore: order_items {
 
   # 行レベルのアクセス権限管理
   # access_filter: {
-  #   field: products.brand
   #   user_attribute: brand
+  #   field: products.brand
   # }
 
   # 行レベルのアクセス権限管理（国）
@@ -479,3 +479,4 @@ explore: basket_detail{
 
 
 # }
+explore: sql_runner_query {}

@@ -206,13 +206,13 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-  # dimension: created_quarter{
-  #   group_label: "受注日"
-  #   group_item_label: "四半期"
-  #   label: "四半期"
-  #   type: date_quarter
-  #   sql: ${TABLE}.created_at ;;
-  # }
+  dimension: created_quarter{
+    group_label: "受注日"
+    group_item_label: "四半期"
+    label: "四半期"
+    type: date_fiscal_quarter
+    sql: ${TABLE}.created_at ;;
+  }
 
   dimension: created_fiscal_year{
     group_label: "受注日"
@@ -222,13 +222,13 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-    # dimension: created_fiscal_month{
-    #   group_label: "受注日"
-    #   group_item_label: "年度月(MM)"
-    #   label: "年度月(MM)"
-    #   type: date_fiscal_month_num
-    #   sql: ${TABLE}.created_at ;;
-    # }
+  # dimension: created_fiscal_month{
+  #   group_label: "受注日"
+  #   group_item_label: "年度月(MM)"
+  #   label: "年度月(MM)"
+  #   type: date_fiscal_month_num
+  #   sql: ${TABLE}.created_at ;;
+  # }
 
 
 
@@ -347,6 +347,7 @@ view: order_items {
     label: "ステータス"
     description: "配送状況を示す"
     sql: ${TABLE}.status ;;
+    hidden: yes
   }
 
 
@@ -422,8 +423,8 @@ view: order_items {
     type: sum
     value_format_name: usd
     sql: ${sale_price};;
-    # drill_fields: [detail*]
-    drill_fields: [created_month, total_sale_price]
+    drill_fields: [detail*]
+    # drill_fields: [created_month, total_sale_price]
 
 
   }
