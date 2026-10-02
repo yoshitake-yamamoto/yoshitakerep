@@ -1,6 +1,6 @@
 view: page_view{
   view_label: "アクセス履歴"
-  sql_table_name: looker-private-demo.ecomm.order_items ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.order_items ;;
   drill_fields: [id]
 
   parameter: interval_days {

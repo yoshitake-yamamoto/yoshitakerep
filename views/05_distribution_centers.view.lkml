@@ -1,6 +1,6 @@
 view: distribution_centers {
   view_label: "配送センター"
-  sql_table_name: looker-private-demo.ecomm.distribution_centers ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.distribution_centers ;;
   dimension: location {
     label: "位置座標"
     type: location

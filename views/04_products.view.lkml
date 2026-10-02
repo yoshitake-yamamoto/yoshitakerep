@@ -1,5 +1,5 @@
 view: products {
-  sql_table_name: looker-private-demo.ecomm.products ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.products ;;
   view_label: "商品マスタ"
   ### DIMENSIONS ###
 

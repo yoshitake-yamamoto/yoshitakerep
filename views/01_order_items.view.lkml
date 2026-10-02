@@ -1,5 +1,6 @@
 view: order_items {
-  sql_table_name: looker-private-demo.ecomm.order_items ;;
+  #sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.order_items ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.order_items ;;
   view_label: "受注明細"
 
 
@@ -348,7 +349,6 @@ view: order_items {
     label: "ステータス"
     description: "配送状況を示す"
     sql: ${TABLE}.status ;;
-    hidden: yes
   }
 
   dimension: status {

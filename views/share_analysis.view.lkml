@@ -38,10 +38,10 @@ view: share_analysis {
       END AS users_age_tier,
           users.gender  AS users_gender,
           COALESCE(SUM(order_items.sale_price), 0) AS order_items_total_sale_price
-      FROM looker-private-demo.ecomm.order_items  AS order_items
-      FULL OUTER JOIN looker-private-demo.ecomm.inventory_items  AS inventory_items ON inventory_items.id = order_items.inventory_item_id
-      LEFT JOIN looker-private-demo.ecomm.users  AS users ON order_items.user_id = users.id
-      FULL OUTER JOIN looker-private-demo.ecomm.products  AS products ON products.id = inventory_items.product_id
+      FROM yoshitake-looker-core-argolis.thelook_ecomm.order_items  AS order_items
+      FULL OUTER JOIN yoshitake-looker-core-argolis.thelook_ecomm.inventory_items  AS inventory_items ON inventory_items.id = order_items.inventory_item_id
+      LEFT JOIN yoshitake-looker-core-argolis.thelook_ecomm.users  AS users ON order_items.user_id = users.id
+      FULL OUTER JOIN yoshitake-looker-core-argolis.thelook_ecomm.products  AS products ON products.id = inventory_items.product_id
       GROUP BY
           1,
           2,

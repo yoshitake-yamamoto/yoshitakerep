@@ -1,5 +1,5 @@
 view: inventory_items {
-  sql_table_name: looker-private-demo.ecomm.inventory_items ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.inventory_items ;;
   view_label: "在庫商品"
   ## DIMENSIONS ##
 

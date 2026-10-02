@@ -9,7 +9,7 @@ view: user_order_facts {
         , CAST(MIN(created_at)  AS TIMESTAMP) AS first_order
         , CAST(MAX(created_at)  AS TIMESTAMP)  AS latest_order
         , COUNT(DISTINCT FORMAT_TIMESTAMP('%Y%m', created_at))  AS number_of_distinct_months_with_orders
-      FROM looker-private-demo.ecomm.order_items
+      FROM yoshitake-looker-core-argolis.thelook_ecomm.order_items
       GROUP BY user_id
     ;;
     #datagroup_trigger: ecommerce_etl_modified

@@ -3,17 +3,17 @@ view: inventory_snapshot {
     #datagroup_trigger: ecommerce_etl_modified
     sql: with calendar as
       (
-      select distinct created_at as snapshot_date
-        from looker-private-demo.ecomm.inventory_items
+      select distinct date(created_at) as snapshot_date
+        from yoshitake-looker-core-argolis.thelook_ecomm.inventory_items
       )
 
       select
       inventory_items.product_id
       ,calendar.snapshot_date
       ,count(*) as number_in_stock
-      from looker-private-demo.ecomm.inventory_items
+      from yoshitake-looker-core-argolis.thelook_ecomm.inventory_items
       join calendar
-      on inventory_items.created_at <= calendar.snapshot_date
+      on date(inventory_items.created_at) <= calendar.snapshot_date
       and (date(inventory_items.sold_at) >= calendar.snapshot_date OR inventory_items.sold_at is null)
       group by 1,2;;
   }

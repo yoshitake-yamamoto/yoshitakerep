@@ -1,5 +1,5 @@
 view: users {
-  sql_table_name: looker-private-demo.ecomm.users ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.users ;;
   view_label: "顧客マスタ"
 
   ## Demographics ##
@@ -61,6 +61,19 @@ view: users {
     style: integer
     sql: ${age} ;;
   }
+
+  dimension: age_group {
+    label: "年齢区分"
+    description: "年齢に応じた区分（未成年・成人・シルバー）"
+    type: string
+    sql: CASE
+        WHEN ${age} < 20 THEN '未成年'
+        WHEN ${age} >= 65 THEN 'シルバー'
+        ELSE '成人'
+      END ;;
+  }
+
+
 
   dimension: gender {
     label: "性別"
@@ -196,7 +209,7 @@ view: users {
   dimension: zip {
     label: "郵便番号(米)"
     type: zipcode
-    sql: ${TABLE}.zip ;;
+    sql: ${TABLE}.postal_code ;;
   }
 
   dimension: uk_postcode {

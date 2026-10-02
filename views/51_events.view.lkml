@@ -1,5 +1,5 @@
 view: events {
-  sql_table_name: looker-private-demo.ecomm.events ;;
+  sql_table_name: yoshitake-looker-core-argolis.thelook_ecomm.events ;;
   label: "WEBイベント"
 
   dimension: event_id {
@@ -88,7 +88,7 @@ view: events {
   dimension: viewed_product_id {
     label: "閲覧された商品ID"
     type: number
-    sql: CASE WHEN ${event_type} = 'Product' THEN
+    sql: CASE WHEN LOWER(${event_type}) = 'product' THEN
           CAST(SPLIT(${full_page_url}, '/')[OFFSET(ARRAY_LENGTH(SPLIT(${full_page_url}, '/'))-1)] AS INT64)
       END
        ;;
@@ -104,11 +104,11 @@ view: events {
     label: "ファネルステップ"
     description: "Login -> Browse -> Add to Cart -> Checkout"
     sql: CASE
-        WHEN ${event_type} IN ('Login', 'Home') THEN '(1) Land'
-        WHEN ${event_type} IN ('Category', 'Brand') THEN '(2) Browse Inventory'
-        WHEN ${event_type} = 'Product' THEN '(3) View Product'
-        WHEN ${event_type} = 'Cart' THEN '(4) Add Item to Cart'
-        WHEN ${event_type} = 'Purchase' THEN '(5) Purchase'
+        WHEN LOWER(${event_type}) IN ('login', 'home') THEN '(1) Land'
+        WHEN LOWER(${event_type}) IN ('category', 'brand', 'department') THEN '(2) Browse Inventory'
+        WHEN LOWER(${event_type}) = 'product' THEN '(3) View Product'
+        WHEN LOWER(${event_type}) = 'cart' THEN '(4) Add Item to Cart'
+        WHEN LOWER(${event_type}) = 'purchase' THEN '(5) Purchase'
       END
        ;;
   }
@@ -116,10 +116,9 @@ view: events {
   measure: unique_visitors {
     label: "ユニークビジター数"
     type: count_distinct
-    # description: "Uniqueness determined by IP Address and User Login"
-    description: "IPアドレスのユニーク数をカウント"
+    description: "IPアドレスおよびユーザーIDによるユニークビジター数をカウント"
     view_label: "ビジター"
-    sql: ${ip} ;;
+    sql: COALESCE(CAST(${TABLE}.user_id AS STRING), ${TABLE}.ip_address) ;;
     drill_fields: [visitors*]
   }
 
@@ -127,16 +126,16 @@ view: events {
     label: "位置情報"
     type: location
     view_label: "ビジター"
-    sql_latitude: ${TABLE}.latitude ;;
-    sql_longitude: ${TABLE}.longitude ;;
+    sql_latitude: CAST(NULL AS FLOAT64) ;;
+    sql_longitude: CAST(NULL AS FLOAT64) ;;
   }
 
   dimension: approx_location {
     label: "位置情報（概算）"
     type: location
     view_label: "ビジター"
-    sql_latitude: round(${TABLE}.latitude,1) ;;
-    sql_longitude: round(${TABLE}.longitude,1) ;;
+    sql_latitude: CAST(NULL AS FLOAT64) ;;
+    sql_longitude: CAST(NULL AS FLOAT64) ;;
   }
 
   dimension: has_user_id {
@@ -157,7 +156,7 @@ view: events {
   dimension: os {
     label: "使用OS"
     view_label: "ビジター"
-    sql: ${TABLE}.os ;;
+    sql: CAST(NULL AS STRING) ;;
   }
 
   measure: count {
@@ -185,9 +184,8 @@ view: events {
     label: "ユニークビジター数(M)"
     view_label: "ビジター"
     type: number
-    sql: count (distinct ${ip}) / 1000000.0 ;;
-    # description: "Uniqueness determined by IP Address and User Login"
-    description: "IPアドレスのユニーク数をカウント"
+    sql: count (distinct COALESCE(CAST(${TABLE}.user_id AS STRING), ${TABLE}.ip_address)) / 1000000.0 ;;
+    description: "IPアドレスおよびユーザーIDによるユニークビジター数をカウント"
     value_format: "#.### \"M\""
     hidden: yes
     drill_fields: [visitors*]
@@ -198,9 +196,8 @@ view: events {
     view_label: "ビジター"
     type: number
     hidden: yes
-    # description: "Uniqueness determined by IP Address and User Login"
-    description: "IPアドレスのユニーク数をカウント"
-    sql: count (distinct ${ip}) / 1000.0 ;;
+    description: "IPアドレスおよびユーザーIDによるユニークビジター数をカウント"
+    sql: count (distinct COALESCE(CAST(${TABLE}.user_id AS STRING), ${TABLE}.ip_address)) / 1000.0 ;;
     value_format: "#.### \"k\""
     drill_fields: [visitors*]
   }
